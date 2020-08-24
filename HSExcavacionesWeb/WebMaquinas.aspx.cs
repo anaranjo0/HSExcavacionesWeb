@@ -201,7 +201,6 @@ namespace HSExcavacionesWeb
             {
                 string VHora = ValorHora.Text.ToString();
                 double val = Convert.ToDouble(VHora.Trim(new char[] {'$', ' ' }));
-                lblError.Text = "pueba";
                 (GRDmaquinaria.FooterRow.FindControl("TxtValorHora") as TextBox).Text = val.ToString();
             }
             if (Fecha != null)

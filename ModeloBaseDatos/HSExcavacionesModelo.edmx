@@ -1,0 +1,510 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DBHSExcavcionesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TblCliente">
+          <Key>
+            <PropertyRef Name="StrDocumento_Cliente" />
+          </Key>
+          <Property Name="StrDocumento_Cliente" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StrNombre_Cliente" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="StrTelefono_Cliente" Type="varchar" MaxLength="50" />
+          <Property Name="StrDireccion_Cliente" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TblHorometro">
+          <Key>
+            <PropertyRef Name="IntCodigo_Horom" />
+          </Key>
+          <Property Name="IntCodigo_Horom" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DtmFecha_Horom" Type="date" Nullable="false" />
+          <Property Name="IntCodigo_Maquina" Type="int" Nullable="false" />
+          <Property Name="IntHoroIni_Horom" Type="numeric" Precision="11" Scale="2" />
+          <Property Name="IntHoroFin_Horom" Type="numeric" Precision="11" Scale="2" />
+          <Property Name="IntHorasOrdina_Horom" Type="numeric" Precision="5" Scale="2" />
+          <Property Name="IntStandBy_Horom" Type="numeric" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="IntHoroIniExt_Horom" Type="numeric" Precision="11" Scale="2" />
+          <Property Name="IntHoroFinExt_Horom" Type="numeric" Precision="11" Scale="2" />
+          <Property Name="IntHoraIniExt_Horom" Type="numeric" Precision="5" Scale="2" />
+          <Property Name="IntHoraFinExt_Horom" Type="numeric" Precision="5" Scale="2" />
+          <Property Name="IntHorasExtras_Horom" Type="numeric" Precision="5" Scale="2" />
+          <Property Name="IntHorasCobrar_Horom" Type="numeric" Precision="5" Scale="2" />
+          <Property Name="DblValorHora_Horom" Type="numeric" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="DblTransporte_Horom" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="IntFactura_Horom" Type="char" MaxLength="100" />
+          <Property Name="Intcodigo_Obra" Type="int" Nullable="false" />
+          <Property Name="StrDocumento_Cliente" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TblMaquina">
+          <Key>
+            <PropertyRef Name="IntCodigo_Maquina" />
+          </Key>
+          <Property Name="IntCodigo_Maquina" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StrNombre_Maquina" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="StrModelo_Maquina" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TblObra">
+          <Key>
+            <PropertyRef Name="Intcodigo_Obra" />
+          </Key>
+          <Property Name="Intcodigo_Obra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StrNombre_Obra" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="StrEncargado_Obra" Type="varchar" MaxLength="200" />
+          <Property Name="StrDocumento_Cliente" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__TblObra__StrDocu__3C34F16F">
+          <End Role="TblCliente" Type="Self.TblCliente" Multiplicity="0..1" />
+          <End Role="TblObra" Type="Self.TblObra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCliente">
+              <PropertyRef Name="StrDocumento_Cliente" />
+            </Principal>
+            <Dependent Role="TblObra">
+              <PropertyRef Name="StrDocumento_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblHorometro_TblCliente">
+          <End Role="TblCliente" Type="Self.TblCliente" Multiplicity="1" />
+          <End Role="TblHorometro" Type="Self.TblHorometro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCliente">
+              <PropertyRef Name="StrDocumento_Cliente" />
+            </Principal>
+            <Dependent Role="TblHorometro">
+              <PropertyRef Name="StrDocumento_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblHorometro_TblMaquina">
+          <End Role="TblMaquina" Type="Self.TblMaquina" Multiplicity="1" />
+          <End Role="TblHorometro" Type="Self.TblHorometro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblMaquina">
+              <PropertyRef Name="IntCodigo_Maquina" />
+            </Principal>
+            <Dependent Role="TblHorometro">
+              <PropertyRef Name="IntCodigo_Maquina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblHorometro_TblObra">
+          <End Role="TblObra" Type="Self.TblObra" Multiplicity="1" />
+          <End Role="TblHorometro" Type="Self.TblHorometro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblObra">
+              <PropertyRef Name="Intcodigo_Obra" />
+            </Principal>
+            <Dependent Role="TblHorometro">
+              <PropertyRef Name="Intcodigo_Obra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Actualizar_Cliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StrDocumento_Cliente" Type="varchar" Mode="In" />
+          <Parameter Name="StrNombre_Cliente" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="borrar_Obra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StrDocumento_Cliente" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Insertar_Cliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StrDocumento_Cliente" Type="varchar" Mode="In" />
+          <Parameter Name="StrNombre_Cliente" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Insertar_Horas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DtmFecha_Horom" Type="date" Mode="In" />
+          <Parameter Name="IntCodigo_Maquina" Type="int" Mode="In" />
+          <Parameter Name="IntHoroIni_Horom" Type="numeric" Mode="In" />
+          <Parameter Name="IntHoroFin_Horom" Type="numeric" Mode="In" />
+          <Parameter Name="IntStandBy_Horom" Type="numeric" Mode="In" />
+          <Parameter Name="IntHoroIniExt_Horom" Type="numeric" Mode="In" />
+          <Parameter Name="IntHoroFinExt_Horom" Type="numeric" Mode="In" />
+          <Parameter Name="IntHoraIniExt_Horom" Type="numeric" Mode="In" />
+          <Parameter Name="IntHoraFinExt_Horom" Type="numeric" Mode="In" />
+          <Parameter Name="DblValorHora_Horom" Type="numeric" Mode="In" />
+          <Parameter Name="DblTransporte_Horom" Type="numeric" Mode="In" />
+          <Parameter Name="IntFactura_Horom" Type="char" Mode="In" />
+          <Parameter Name="Intcodigo_Obra" Type="int" Mode="In" />
+          <Parameter Name="StrDocumento_Cliente" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Insertar_Obra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StrNombre_Obra" Type="varchar" Mode="In" />
+          <Parameter Name="StrDocumento_Cliente" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Seleccionar_Cliente_Obra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StrDocumento_Cliente" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Seleccionar_Horas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Seleccionar_Obras" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StrDocumento_Cliente" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="DBHSExcavcionesModelStoreContainer">
+          <EntitySet Name="TblCliente" EntityType="Self.TblCliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblHorometro" EntityType="Self.TblHorometro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblMaquina" EntityType="Self.TblMaquina" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblObra" EntityType="Self.TblObra" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__TblObra__StrDocu__3C34F16F" Association="Self.FK__TblObra__StrDocu__3C34F16F">
+            <End Role="TblCliente" EntitySet="TblCliente" />
+            <End Role="TblObra" EntitySet="TblObra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblHorometro_TblCliente" Association="Self.FK_TblHorometro_TblCliente">
+            <End Role="TblCliente" EntitySet="TblCliente" />
+            <End Role="TblHorometro" EntitySet="TblHorometro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblHorometro_TblMaquina" Association="Self.FK_TblHorometro_TblMaquina">
+            <End Role="TblMaquina" EntitySet="TblMaquina" />
+            <End Role="TblHorometro" EntitySet="TblHorometro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblHorometro_TblObra" Association="Self.FK_TblHorometro_TblObra">
+            <End Role="TblObra" EntitySet="TblObra" />
+            <End Role="TblHorometro" EntitySet="TblHorometro" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBHSExcavcionesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DBHSExcavcionesEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TblCliente" EntityType="DBHSExcavcionesModel.TblCliente" />
+          <EntitySet Name="TblMaquina" EntityType="DBHSExcavcionesModel.TblMaquina" />
+          <EntitySet Name="TblObra" EntityType="DBHSExcavcionesModel.TblObra" />
+          <EntitySet Name="TblHorometro" EntityType="DBHSExcavcionesModel.TblHorometro" />
+          <AssociationSet Name="FK_TblHorometro_TblCliente" Association="DBHSExcavcionesModel.FK_TblHorometro_TblCliente">
+            <End Role="TblCliente" EntitySet="TblCliente" />
+            <End Role="TblHorometro" EntitySet="TblHorometro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblHorometro_TblMaquina" Association="DBHSExcavcionesModel.FK_TblHorometro_TblMaquina">
+            <End Role="TblMaquina" EntitySet="TblMaquina" />
+            <End Role="TblHorometro" EntitySet="TblHorometro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblHorometro_TblObra" Association="DBHSExcavcionesModel.FK_TblHorometro_TblObra">
+            <End Role="TblObra" EntitySet="TblObra" />
+            <End Role="TblHorometro" EntitySet="TblHorometro" />
+          </AssociationSet>
+          <FunctionImport Name="Insertar_Horas">
+            <Parameter Name="DtmFecha_Horom" Mode="In" Type="DateTime" />
+            <Parameter Name="IntCodigo_Maquina" Mode="In" Type="Int32" />
+            <Parameter Name="IntHoroIni_Horom" Mode="In" Type="Decimal" />
+            <Parameter Name="IntHoroFin_Horom" Mode="In" Type="Decimal" />
+            <Parameter Name="IntStandBy_Horom" Mode="In" Type="Decimal" />
+            <Parameter Name="IntHoroIniExt_Horom" Mode="In" Type="Decimal" />
+            <Parameter Name="IntHoroFinExt_Horom" Mode="In" Type="Decimal" />
+            <Parameter Name="IntHoraIniExt_Horom" Mode="In" Type="Decimal" />
+            <Parameter Name="IntHoraFinExt_Horom" Mode="In" Type="Decimal" />
+            <Parameter Name="DblValorHora_Horom" Mode="In" Type="Decimal" />
+            <Parameter Name="DblTransporte_Horom" Mode="In" Type="Decimal" />
+            <Parameter Name="IntFactura_Horom" Mode="In" Type="String" />
+            <Parameter Name="Intcodigo_Obra" Mode="In" Type="Int32" />
+            <Parameter Name="StrDocumento_Cliente" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Seleccionar_Horas" ReturnType="Collection(DBHSExcavcionesModel.Seleccionar_Horas_Result1)" />
+          <AssociationSet Name="FK__TblObra__StrDocu__3C34F16F" Association="DBHSExcavcionesModel.FK__TblObra__StrDocu__3C34F16F">
+            <End Role="TblCliente" EntitySet="TblCliente" />
+            <End Role="TblObra" EntitySet="TblObra" />
+          </AssociationSet>
+          <FunctionImport Name="Insertar_Cliente">
+            <Parameter Name="StrDocumento_Cliente" Mode="In" Type="String" />
+            <Parameter Name="StrNombre_Cliente" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Insertar_Obra">
+            <Parameter Name="StrNombre_Obra" Mode="In" Type="String" />
+            <Parameter Name="StrDocumento_Cliente" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Seleccionar_Obras" ReturnType="Collection(String)">
+          <Parameter Name="StrDocumento_Cliente" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Seleccionar_Cliente_Obra" ReturnType="Collection(String)">
+          <Parameter Name="StrDocumento_Cliente" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="borrar_Obra">
+          <Parameter Name="StrDocumento_Cliente" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Actualizar_Cliente">
+            <Parameter Name="StrDocumento_Cliente" Mode="In" Type="String" />
+            <Parameter Name="StrNombre_Cliente" Mode="In" Type="String" />
+          </FunctionImport>
+          </EntityContainer>
+        <ComplexType Name="Seleccionar_Horas_Result">
+          <Property Type="DateTime" Name="DtmFecha_Horom" Nullable="false" />
+          <Property Type="Int32" Name="IntCodigo_Maquina" Nullable="false" />
+          <Property Type="Decimal" Name="IntHoroIni_Horom" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="IntHoroFin_Horom" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="IntHorasOrdina_Horom" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="IntStandBy_Horom" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="IntHoroIniExt_Horom" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="IntHoroFinExt_Horom" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="IntHoraIniExt_Horom" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="IntHoraFinExt_Horom" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="IntHorasExtras_Horom" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="IntHorasCobrar_Horom" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="DblValorHora_Horom" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="DblTransporte_Horom" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Int32" Name="IntFactura_Horom" Nullable="false" />
+          <Property Type="Int32" Name="Intcodigo_Obra" Nullable="false" />
+          <Property Type="String" Name="StrDocumento_Cliente" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="TblCliente">
+          <Key>
+            <PropertyRef Name="StrDocumento_Cliente" />
+          </Key>
+          <Property Name="StrDocumento_Cliente" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StrNombre_Cliente" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StrTelefono_Cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StrDireccion_Cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TblHorometro" Relationship="DBHSExcavcionesModel.FK_TblHorometro_TblCliente" FromRole="TblCliente" ToRole="TblHorometro" />
+          <NavigationProperty Name="TblObra" Relationship="DBHSExcavcionesModel.FK__TblObra__StrDocu__3C34F16F" FromRole="TblCliente" ToRole="TblObra" />
+        </EntityType>
+        <EntityType Name="TblMaquina">
+          <Key>
+            <PropertyRef Name="IntCodigo_Maquina" />
+          </Key>
+          <Property Name="IntCodigo_Maquina" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StrNombre_Maquina" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StrModelo_Maquina" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TblHorometro" Relationship="DBHSExcavcionesModel.FK_TblHorometro_TblMaquina" FromRole="TblMaquina" ToRole="TblHorometro" />
+        </EntityType>
+        <EntityType Name="TblObra">
+          <Key>
+            <PropertyRef Name="Intcodigo_Obra" />
+          </Key>
+          <Property Name="Intcodigo_Obra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StrNombre_Obra" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="StrEncargado_Obra" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TblHorometro" Relationship="DBHSExcavcionesModel.FK_TblHorometro_TblObra" FromRole="TblObra" ToRole="TblHorometro" />
+          <Property Name="StrDocumento_Cliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TblCliente" Relationship="DBHSExcavcionesModel.FK__TblObra__StrDocu__3C34F16F" FromRole="TblObra" ToRole="TblCliente" />
+        </EntityType>
+        <EntityType Name="TblHorometro">
+          <Key>
+            <PropertyRef Name="IntCodigo_Horom" />
+          </Key>
+          <Property Name="IntCodigo_Horom" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DtmFecha_Horom" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IntCodigo_Maquina" Type="Int32" Nullable="false" />
+          <Property Name="IntHoroIni_Horom" Type="Decimal" Precision="11" Scale="2" />
+          <Property Name="IntHoroFin_Horom" Type="Decimal" Precision="11" Scale="2" />
+          <Property Name="IntHorasOrdina_Horom" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="IntStandBy_Horom" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="IntHoroIniExt_Horom" Type="Decimal" Precision="11" Scale="2" />
+          <Property Name="IntHoroFinExt_Horom" Type="Decimal" Precision="11" Scale="2" />
+          <Property Name="IntHoraIniExt_Horom" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="IntHoraFinExt_Horom" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="IntHorasExtras_Horom" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="IntHorasCobrar_Horom" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="DblValorHora_Horom" Type="Decimal" Nullable="false" Precision="6" Scale="0" />
+          <Property Name="DblTransporte_Horom" Type="Decimal" Precision="7" Scale="0" />
+          <Property Name="IntFactura_Horom" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+          <Property Name="Intcodigo_Obra" Type="Int32" Nullable="false" />
+          <Property Name="StrDocumento_Cliente" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TblCliente" Relationship="DBHSExcavcionesModel.FK_TblHorometro_TblCliente" FromRole="TblHorometro" ToRole="TblCliente" />
+          <NavigationProperty Name="TblMaquina" Relationship="DBHSExcavcionesModel.FK_TblHorometro_TblMaquina" FromRole="TblHorometro" ToRole="TblMaquina" />
+          <NavigationProperty Name="TblObra" Relationship="DBHSExcavcionesModel.FK_TblHorometro_TblObra" FromRole="TblHorometro" ToRole="TblObra" />
+        </EntityType>
+        <Association Name="FK_TblHorometro_TblCliente">
+          <End Type="DBHSExcavcionesModel.TblCliente" Role="TblCliente" Multiplicity="1" />
+          <End Type="DBHSExcavcionesModel.TblHorometro" Role="TblHorometro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCliente">
+              <PropertyRef Name="StrDocumento_Cliente" />
+            </Principal>
+            <Dependent Role="TblHorometro">
+              <PropertyRef Name="StrDocumento_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblHorometro_TblMaquina">
+          <End Type="DBHSExcavcionesModel.TblMaquina" Role="TblMaquina" Multiplicity="1" />
+          <End Type="DBHSExcavcionesModel.TblHorometro" Role="TblHorometro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblMaquina">
+              <PropertyRef Name="IntCodigo_Maquina" />
+            </Principal>
+            <Dependent Role="TblHorometro">
+              <PropertyRef Name="IntCodigo_Maquina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblHorometro_TblObra">
+          <End Type="DBHSExcavcionesModel.TblObra" Role="TblObra" Multiplicity="1" />
+          <End Type="DBHSExcavcionesModel.TblHorometro" Role="TblHorometro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblObra">
+              <PropertyRef Name="Intcodigo_Obra" />
+            </Principal>
+            <Dependent Role="TblHorometro">
+              <PropertyRef Name="Intcodigo_Obra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="Seleccionar_GridFactura_Result">
+          <Property Type="String" Name="IntFactura_Horom" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="DtmFecha_Horom" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="StrNombre_Maquina" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="StrNombre_Obra" Nullable="false" MaxLength="200" />
+          <Property Type="Decimal" Name="IntHorasCobrar_Horom" Nullable="true" Precision="7" Scale="2" />
+          <Property Type="Decimal" Name="DblTransporte_Horom" Nullable="true" Precision="7" Scale="0" />
+          <Property Type="Decimal" Name="Valor" Nullable="true" Precision="15" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="Seleccionar_Horas_Result1">
+          <Property Type="Int32" Name="IntCodigo_Horom" Nullable="false" />
+          <Property Type="DateTime" Name="DtmFecha_Horom" Nullable="false" />
+          <Property Type="Int32" Name="IntCodigo_Maquina" Nullable="false" />
+          <Property Type="Decimal" Name="IntHoroIni_Horom" Nullable="true" Precision="11" Scale="2" />
+          <Property Type="Decimal" Name="IntHoroFin_Horom" Nullable="true" Precision="11" Scale="2" />
+          <Property Type="Decimal" Name="IntHorasOrdina_Horom" Nullable="true" Precision="5" Scale="2" />
+          <Property Type="Decimal" Name="IntStandBy_Horom" Nullable="false" Precision="5" Scale="2" />
+          <Property Type="Decimal" Name="IntHoroIniExt_Horom" Nullable="true" Precision="11" Scale="2" />
+          <Property Type="Decimal" Name="IntHoroFinExt_Horom" Nullable="true" Precision="11" Scale="2" />
+          <Property Type="Decimal" Name="IntHoraIniExt_Horom" Nullable="true" Precision="5" Scale="2" />
+          <Property Type="Decimal" Name="IntHoraFinExt_Horom" Nullable="true" Precision="5" Scale="2" />
+          <Property Type="Decimal" Name="IntHorasExtras_Horom" Nullable="true" Precision="5" Scale="2" />
+          <Property Type="Decimal" Name="IntHorasCobrar_Horom" Nullable="true" Precision="5" Scale="2" />
+          <Property Type="Decimal" Name="DblValorHora_Horom" Nullable="false" Precision="6" Scale="0" />
+          <Property Type="Decimal" Name="DblTransporte_Horom" Nullable="true" Precision="7" Scale="0" />
+          <Property Type="String" Name="IntFactura_Horom" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Intcodigo_Obra" Nullable="false" />
+          <Property Type="String" Name="StrDocumento_Cliente" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <Association Name="FK__TblObra__StrDocu__3C34F16F">
+          <End Type="DBHSExcavcionesModel.TblCliente" Role="TblCliente" Multiplicity="0..1" />
+          <End Type="DBHSExcavcionesModel.TblObra" Role="TblObra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCliente">
+              <PropertyRef Name="StrDocumento_Cliente" />
+            </Principal>
+            <Dependent Role="TblObra">
+              <PropertyRef Name="StrDocumento_Cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="Seleccionar_Cliente_Obra_Result">
+          <Property Type="String" Name="StrDocumento_Cliente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="StrNombre_Cliente" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBHSExcavcionesModelStoreContainer" CdmEntityContainer="DBHSExcavcionesEntities1">
+          <EntitySetMapping Name="TblCliente">
+            <EntityTypeMapping TypeName="DBHSExcavcionesModel.TblCliente">
+              <MappingFragment StoreEntitySet="TblCliente">
+                <ScalarProperty Name="StrDireccion_Cliente" ColumnName="StrDireccion_Cliente" />
+                <ScalarProperty Name="StrTelefono_Cliente" ColumnName="StrTelefono_Cliente" />
+                <ScalarProperty Name="StrNombre_Cliente" ColumnName="StrNombre_Cliente" />
+                <ScalarProperty Name="StrDocumento_Cliente" ColumnName="StrDocumento_Cliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblMaquina">
+            <EntityTypeMapping TypeName="DBHSExcavcionesModel.TblMaquina">
+              <MappingFragment StoreEntitySet="TblMaquina">
+                <ScalarProperty Name="StrModelo_Maquina" ColumnName="StrModelo_Maquina" />
+                <ScalarProperty Name="StrNombre_Maquina" ColumnName="StrNombre_Maquina" />
+                <ScalarProperty Name="IntCodigo_Maquina" ColumnName="IntCodigo_Maquina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblObra">
+            <EntityTypeMapping TypeName="DBHSExcavcionesModel.TblObra">
+              <MappingFragment StoreEntitySet="TblObra">
+                <ScalarProperty Name="StrDocumento_Cliente" ColumnName="StrDocumento_Cliente" />
+                <ScalarProperty Name="StrEncargado_Obra" ColumnName="StrEncargado_Obra" />
+                <ScalarProperty Name="StrNombre_Obra" ColumnName="StrNombre_Obra" />
+                <ScalarProperty Name="Intcodigo_Obra" ColumnName="Intcodigo_Obra" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblHorometro">
+            <EntityTypeMapping TypeName="DBHSExcavcionesModel.TblHorometro">
+              <MappingFragment StoreEntitySet="TblHorometro">
+                <ScalarProperty Name="StrDocumento_Cliente" ColumnName="StrDocumento_Cliente" />
+                <ScalarProperty Name="Intcodigo_Obra" ColumnName="Intcodigo_Obra" />
+                <ScalarProperty Name="IntFactura_Horom" ColumnName="IntFactura_Horom" />
+                <ScalarProperty Name="DblTransporte_Horom" ColumnName="DblTransporte_Horom" />
+                <ScalarProperty Name="DblValorHora_Horom" ColumnName="DblValorHora_Horom" />
+                <ScalarProperty Name="IntHorasCobrar_Horom" ColumnName="IntHorasCobrar_Horom" />
+                <ScalarProperty Name="IntHorasExtras_Horom" ColumnName="IntHorasExtras_Horom" />
+                <ScalarProperty Name="IntHoraFinExt_Horom" ColumnName="IntHoraFinExt_Horom" />
+                <ScalarProperty Name="IntHoraIniExt_Horom" ColumnName="IntHoraIniExt_Horom" />
+                <ScalarProperty Name="IntHoroFinExt_Horom" ColumnName="IntHoroFinExt_Horom" />
+                <ScalarProperty Name="IntHoroIniExt_Horom" ColumnName="IntHoroIniExt_Horom" />
+                <ScalarProperty Name="IntStandBy_Horom" ColumnName="IntStandBy_Horom" />
+                <ScalarProperty Name="IntHorasOrdina_Horom" ColumnName="IntHorasOrdina_Horom" />
+                <ScalarProperty Name="IntHoroFin_Horom" ColumnName="IntHoroFin_Horom" />
+                <ScalarProperty Name="IntHoroIni_Horom" ColumnName="IntHoroIni_Horom" />
+                <ScalarProperty Name="IntCodigo_Maquina" ColumnName="IntCodigo_Maquina" />
+                <ScalarProperty Name="DtmFecha_Horom" ColumnName="DtmFecha_Horom" />
+                <ScalarProperty Name="IntCodigo_Horom" ColumnName="IntCodigo_Horom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Insertar_Horas" FunctionName="DBHSExcavcionesModel.Store.Insertar_Horas" />
+          <FunctionImportMapping FunctionImportName="Seleccionar_Horas" FunctionName="DBHSExcavcionesModel.Store.Seleccionar_Horas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBHSExcavcionesModel.Seleccionar_Horas_Result1">
+                <ScalarProperty Name="IntCodigo_Horom" ColumnName="IntCodigo_Horom" />
+                <ScalarProperty Name="DtmFecha_Horom" ColumnName="DtmFecha_Horom" />
+                <ScalarProperty Name="IntCodigo_Maquina" ColumnName="IntCodigo_Maquina" />
+                <ScalarProperty Name="IntHoroIni_Horom" ColumnName="IntHoroIni_Horom" />
+                <ScalarProperty Name="IntHoroFin_Horom" ColumnName="IntHoroFin_Horom" />
+                <ScalarProperty Name="IntHorasOrdina_Horom" ColumnName="IntHorasOrdina_Horom" />
+                <ScalarProperty Name="IntStandBy_Horom" ColumnName="IntStandBy_Horom" />
+                <ScalarProperty Name="IntHoroIniExt_Horom" ColumnName="IntHoroIniExt_Horom" />
+                <ScalarProperty Name="IntHoroFinExt_Horom" ColumnName="IntHoroFinExt_Horom" />
+                <ScalarProperty Name="IntHoraIniExt_Horom" ColumnName="IntHoraIniExt_Horom" />
+                <ScalarProperty Name="IntHoraFinExt_Horom" ColumnName="IntHoraFinExt_Horom" />
+                <ScalarProperty Name="IntHorasExtras_Horom" ColumnName="IntHorasExtras_Horom" />
+                <ScalarProperty Name="IntHorasCobrar_Horom" ColumnName="IntHorasCobrar_Horom" />
+                <ScalarProperty Name="DblValorHora_Horom" ColumnName="DblValorHora_Horom" />
+                <ScalarProperty Name="DblTransporte_Horom" ColumnName="DblTransporte_Horom" />
+                <ScalarProperty Name="IntFactura_Horom" ColumnName="IntFactura_Horom" />
+                <ScalarProperty Name="Intcodigo_Obra" ColumnName="Intcodigo_Obra" />
+                <ScalarProperty Name="StrDocumento_Cliente" ColumnName="StrDocumento_Cliente" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Insertar_Cliente" FunctionName="DBHSExcavcionesModel.Store.Insertar_Cliente" />
+          <FunctionImportMapping FunctionImportName="Insertar_Obra" FunctionName="DBHSExcavcionesModel.Store.Insertar_Obra" />
+          <FunctionImportMapping FunctionImportName="Seleccionar_Obras" FunctionName="DBHSExcavcionesModel.Store.Seleccionar_Obras" />
+          <FunctionImportMapping FunctionImportName="Seleccionar_Cliente_Obra" FunctionName="DBHSExcavcionesModel.Store.Seleccionar_Cliente_Obra" />
+          <FunctionImportMapping FunctionImportName="borrar_Obra" FunctionName="DBHSExcavcionesModel.Store.borrar_Obra" />
+          <FunctionImportMapping FunctionImportName="Actualizar_Cliente" FunctionName="DBHSExcavcionesModel.Store.Actualizar_Cliente" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

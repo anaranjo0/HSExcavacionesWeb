@@ -135,6 +135,9 @@ namespace HSExcavacionesWeb
             txtObra.Text = "";
             grdClientes.Visible = false;
             lnkGuardar.Visible = false;
+            lblObrasNuevas.Visible = false;
+            lblObrasActuales.Visible = false;
+            grdConsultaObras.Visible = false;
         }
 
         protected void dpConsultaCliente_SelectedIndexChanged(object sender, EventArgs e)

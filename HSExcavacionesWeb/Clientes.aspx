@@ -66,7 +66,7 @@
                         <asp:Label ID="lblObrasActuales" runat="server" Text="Obras Actuales" Visible="False"></asp:Label>
                         </h5>
                         <br />
-                        <asp:GridView ID="grdConsultaObras" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="Intcodigo_Obra" DataSourceID="SqlConsultarObras" ForeColor="Black" GridLines="Vertical">
+                        <asp:GridView ID="grdConsultaObras" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="Intcodigo_Obra" DataSourceID="SqlConsultarObras" ForeColor="Black" GridLines="Vertical" Visible="False">
                             <AlternatingRowStyle BackColor="White" />
                             <Columns>
                                 <asp:CommandField ShowEditButton="True" />

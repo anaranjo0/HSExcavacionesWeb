@@ -25,17 +25,18 @@ namespace HSExcavacionesWeb
         private void dimensionarGridOBra()
         {
             DataTable dtsObra = new DataTable();
-            dtsObra.Columns.Add(new DataColumn("Obra", typeof(string)));
+            dtsObra.Columns.Add(new DataColumn("Nombre Obra", typeof(string)));
             Session["gridObra"] = dtsObra;
 
         }
         protected void lnkAgregarOb_Click(object sender, EventArgs e)
         {
+            lblObrasNuevas.Visible = true;
             if (txtObra.Text != "")
             {
                 dtsGridObra = (DataTable)Session["gridObra"];
                 DataRow dr = dtsGridObra.NewRow();
-                dr["Obra"] = this.txtObra.Text;
+                dr["Nombre Obra"] = this.txtObra.Text;
                 dtsGridObra.Rows.Add(dr);
 
                 grdClientes.DataSource = dtsGridObra;
@@ -103,8 +104,8 @@ namespace HSExcavacionesWeb
 
             if (ActCliente.ActualizarCliente())
             {
-                if (ActCliente.BorrarObra())
-                {
+                //if (ActCliente.BorrarObra())
+                //{
                     if (ActCliente.IngresarObra())
                     {
                         lblError.Text = "Cliente - Obra actualizado correctamente";
@@ -115,11 +116,11 @@ namespace HSExcavacionesWeb
                     {
                         lblError.Text = "Se presento error ingrensando las obras: " + ActCliente.strError;
                     }
-                }
-                else
-                {
-                    lblError.Text = "Se presento error borrando las obras: " + ActCliente.strError;
-                }
+                //}
+                //else
+                //{
+                //    lblError.Text = "Se presento error borrando las obras: " + ActCliente.strError;
+                //}
             }
             else
             {
@@ -143,23 +144,25 @@ namespace HSExcavacionesWeb
             cliente.strDocCliente = dpConsultaCliente.SelectedValue.ToString();
             List<string> Selcli = cliente.Cliente();
             txtDocCliente.Text = dpConsultaCliente.SelectedValue.ToString();
-            foreach(string cli in Selcli)
+            foreach (string cli in Selcli)
             {
                 txtNombreCliente.Text = cli.ToString();
             }
 
-            List<string> obras = cliente.obras();
-            grdClientes.DataSource = obras;
-            grdClientes.DataBind();
-            grdClientes.Visible = true;
+            //List<string> obras = cliente.obras();
+            //grdClientes.DataSource = obras;
+            //grdClientes.DataBind();
+            //grdClientes.Visible = true;
             txtDocCliente.Enabled = false;
             lnkGuardar.Visible = true;
-            Session["gridObra"] = ListToDatatable(obras);
+            lblObrasActuales.Visible = true;
+            lblObrasNuevas.Visible = false;
+            //Session["gridObra"] = ListToDatatable(obras);
 
-            
 
+            grdConsultaObras.Visible = true;
         }
-        
+
         protected static DataTable ListToDatatable(List<string> lista)
         {
             
@@ -179,6 +182,7 @@ namespace HSExcavacionesWeb
             txtDocCliente.Enabled = true;
             Session["gridObra"] = null;
             dimensionarGridOBra();
+            grdConsultaObras.Visible = false;
         }
 
         protected void grdClientes_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -188,5 +192,7 @@ namespace HSExcavacionesWeb
             grdClientes.DataSource = dtsGridObra.DefaultView;
             grdClientes.DataBind();
         }
+
+
     }
 }

@@ -78,6 +78,15 @@ namespace HSExcavacionesWeb
         protected global::System.Web.UI.WebControls.LinkButton lnkAgregarOb;
 
         /// <summary>
+        /// Control lblObrasNuevas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblObrasNuevas;
+
+        /// <summary>
         /// Control grdClientes.
         /// </summary>
         /// <remarks>
@@ -85,6 +94,33 @@ namespace HSExcavacionesWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grdClientes;
+
+        /// <summary>
+        /// Control lblObrasActuales.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblObrasActuales;
+
+        /// <summary>
+        /// Control grdConsultaObras.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdConsultaObras;
+
+        /// <summary>
+        /// Control SqlConsultarObras.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlConsultarObras;
 
         /// <summary>
         /// Control lnkGuardar.

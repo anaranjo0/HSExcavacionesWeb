@@ -50,6 +50,15 @@
                     <asp:BoundField DataField="IntFactura_Horom" HeaderText="Número Factura" SortExpression="IntFactura_Horom" />
                     <asp:BoundField DataField="DtmFecha_Horom" HeaderText="Fecha" SortExpression="DtmFecha_Horom" ReadOnly="True" />
 
+                    <asp:BoundField DataField="IntHoroIni_Horom" HeaderText="Horometro Inicial" SortExpression="IntHoroIni_Horom" />
+                    <asp:BoundField DataField="IntHoroFin_Horom" HeaderText="Horometro Final" SortExpression="IntHoroFin_Horom" />
+
+                    <asp:BoundField DataField="IntHorasOrdina_Horom" HeaderText="Horas Ordinaria" SortExpression="IntHorasOrdina_Horom" />
+                    <asp:BoundField DataField="IntStandBy_Horom" HeaderText="Stand by" SortExpression="IntStandBy_Horom" />
+                    <asp:BoundField DataField="IntHoroIniExt_Horom" HeaderText="Horometro Inicial Extra" SortExpression="IntHoroIniExt_Horom" />
+                    <asp:BoundField DataField="IntHoroFinExt_Horom" HeaderText="Horometro Final Extra" SortExpression="IntHoroFinExt_Horom" />
+                    <asp:BoundField DataField="IntHorasExtras_Horom" HeaderText="Horas Extras" SortExpression="IntHorasExtras_Horom" />
+
                     <asp:TemplateField HeaderText="Horas a Cobrar" SortExpression="IntHorasCobrar_Horom">
                         <EditItemTemplate>
                             <asp:Label ID="Label1" runat="server" Text='<%# Eval("IntHorasCobrar_Horom") %>'></asp:Label>
@@ -61,6 +70,24 @@
                             <asp:Label ID="Label1" runat="server" Text='<%# Bind("IntHorasCobrar_Horom") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Valor Hora" SortExpression="DblValorHora_Horom">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("DblValorHora_Horom") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label5" runat="server" Text='<%# Bind("DblValorHora_Horom","{0:C}") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Right" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Subtotal" SortExpression="Total_Horas">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("Total_Horas") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label4" runat="server" Text='<%# Bind("Total_Horas","{0:C}") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Right" />
+                    </asp:TemplateField>
                     <asp:TemplateField HeaderText="Transporte" SortExpression="DblTransporte_Horom">
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("DblTransporte_Horom") %>'></asp:TextBox>
@@ -71,11 +98,10 @@
                         <ItemTemplate>
                             <asp:Label ID="Label2" runat="server" Text='<%# Bind("DblTransporte_Horom","{0:C}") %>'></asp:Label>
                         </ItemTemplate>
+                        <ItemStyle HorizontalAlign="Right" />
                     </asp:TemplateField>
 
-                    <asp:BoundField DataField="StrNombre_Maquina" HeaderText="Maquina" SortExpression="StrNombre_Maquina" />
-
-                    <asp:BoundField DataField="StrNombre_Obra" HeaderText="Obra" SortExpression="StrNombre_Obra" />
+                 
 
                     <asp:TemplateField HeaderText="Valor" SortExpression="Valor">
                         <EditItemTemplate>

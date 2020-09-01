@@ -87,6 +87,7 @@
     <Content Include="Imagenes\buscar.jpg" />
     <Content Include="Imagenes\calendario3.jpg" />
     <Content Include="Imagenes\Dozer.jpg" />
+    <Content Include="Imagenes\t1.png" />
     <Content Include="js\Funciones.js" />
     <Content Include="default.aspx" />
     <Content Include="packages.config" />

@@ -85,7 +85,8 @@ namespace HSExcavacionesWeb
                     {
                         e.Row.Cells[6].BackColor = Color.FromName("#f55b5b");
                         Label Domingo = (Label)e.Row.FindControl("LblIFecha");
-
+                        e.Row.FindControl("ImgObserva").Visible = true;
+                        
                         if (Domingo != null)
                         {
                             string Valor = Convert.ToString(Domingo.Text);

@@ -130,6 +130,7 @@
                             </FooterTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label5" runat="server" Text='<%# Bind("IntStandBy_Horom") %>'></asp:Label>
+                                &nbsp;<asp:ImageButton ID="ImgObserva" runat="server" Height="25px" ImageAlign="AbsMiddle" ImageUrl="~/Imagenes/t1.png" Visible="False" />
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Horometro Inicial Extra" SortExpression="IntHoroIniExt_Horom">

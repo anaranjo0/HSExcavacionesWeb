@@ -50,7 +50,14 @@
                 <asp:GridView ID="GRDmaquinaria" runat="server"  AutoGenerateColumns="False" DataSourceID="SQLDTGHorometro" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="IntCodigo_Horom" ForeColor="Black" GridLines="Vertical" Height="247px" ShowFooter="True" OnRowDataBound="GRDmaquinaria_RowDataBound" OnDataBound="GRDmaquinaria_DataBound" PageSize="360"  >
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
-                        <asp:BoundField DataField="IntCodigo_Horom" SortExpression="IntCodigo_Horom" InsertVisible="False" ReadOnly="True" ShowHeader="False" Visible="False" HeaderText="IntCodigo_Horom" />
+                        <asp:TemplateField HeaderText="IntCodigo_Horom" InsertVisible="False" ShowHeader="False" SortExpression="IntCodigo_Horom" Visible="False">
+                            <EditItemTemplate>
+                                <asp:Label ID="Label3" runat="server" Text='<%# Eval("IntCodigo_Horom") %>'></asp:Label>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="lblcodhorom" runat="server" Text='<%# Bind("IntCodigo_Horom") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="Fecha" SortExpression="DtmFecha_Horom">
                             <EditItemTemplate>
                                 <asp:TextBox ID="txtEFecha" runat="server" CssClass="form-control" onKeyPress="return NumCheck(event,this)" Text='<%# Bind("FechaActualiza") %>' Width="180px"></asp:TextBox>
@@ -83,7 +90,7 @@
                         </ItemTemplate>
                         </asp:TemplateField>
                        
-                        <asp:BoundField DataField="IntCodigo_Maquina" HeaderText="IntCodigo_Maquina" SortExpression="IntCodigo_Maquina" Visible="False" ReadOnly="True" />
+                        <asp:BoundField DataField="IntCodigo_Maquina" SortExpression="IntCodigo_Maquina" ReadOnly="True" Visible="False" HeaderText="IntCodigo_Maquina" />
                        
                         <asp:TemplateField HeaderText="Horometo Inicial" SortExpression="IntHoroIni_Horom">
                             <EditItemTemplate>

@@ -42,13 +42,13 @@ namespace HSExcavacionesWeb
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
 
-              if(e.Row.RowIndex.ToString() == Session["index"].ToString())
-                {
-                    Session["index"] = e.Row.Cells[0].Text;
-                }
+              //if(e.Row.RowIndex.ToString() == Session["index"].ToString())
+              //  {
+              //      Session["index"] = e.Row.Cells[0].Text;
+              //  }
 
 
-                Label Horo = (Label)e.Row.DataItem("lblHinicial");
+                Label Horo = (Label)e.Row.FindControl("lblHinicial");
                 if (Horo != null & Session["Hfinal"].ToString() != "0")
                 {
                     Double Hini = Double.Parse(Horo.Text);
@@ -193,6 +193,7 @@ namespace HSExcavacionesWeb
             (GRDmaquinaria.FooterRow.FindControl("TxtFStandby") as TextBox).Text = standby.ToString();
             (GRDmaquinaria.FooterRow.FindControl("TxtFHoroIniExt") as TextBox).Text = Hfinal.ToString();
             (GRDmaquinaria.FooterRow.FindControl("TxtFHoroFinExt") as TextBox).Text = Hfinal.ToString();
+            
         }
 
       
@@ -277,17 +278,14 @@ namespace HSExcavacionesWeb
 
             //Get the row that contains this button
             GridViewRow gvr = (GridViewRow)btn.NamingContainer;
-            //GRDmaquinaria.DataBind();
-            Session["index"]  = gvr.RowIndex;
-            GRDmaquinaria.DataBind();
-            
-            
-            //int id = GRDmaquinaria.PageIndex;
+            int index = gvr.RowIndex;
+            int codigo = Convert.ToInt32((GRDmaquinaria.Rows[index].FindControl("lblcodhorom") as Label).Text);
 
-            //int codigo = Convert.ToInt32( (GRDmaquinaria.Rows[id].FindControl("IntCodigo_Horom") as TextBox).Text);
-            ////Se abre la ventana en popup y se ajusta a un tamaño mas pequeño
-            //string vtn = "window.open('WebObservaciones.aspx?"+ codigo +"','mywindow','width=600,height=300')";
-            //ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", vtn, true);
+            //Se abre la ventana en popup y se ajusta a un tamaño mas pequeño
+            string vtn = "window.open('WebObservaciones.aspx?codigo=" + codigo + "','mywindow','width=700,height=400')";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", vtn, true);
+
+            GRDmaquinaria.DataBind();
 
 
         }

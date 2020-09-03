@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MaintainScrollPositionOnPostback="true" MasterPageFile="~/HSExcavaciones.Master" AutoEventWireup="true" CodeBehind="WebMaquinas.aspx.cs" Inherits="HSExcavacionesWeb.WebMaquinas" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     
       <style type="text/css">
@@ -23,9 +24,7 @@
     <link rel="stylesheet" href="css/Style.css" />
     <script type="text/javascript" src="js/Funciones.js"></script>
      
-    <script type="text/javascript" >
-       
-    </script>
+   
 
    <section class="section-dropdown">
        <div>
@@ -129,8 +128,9 @@
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="TxtFStandby" ErrorMessage="*" ForeColor="#CC0000" ValidationGroup="Ingresar"></asp:RequiredFieldValidator>
                             </FooterTemplate>
                             <ItemTemplate>
+                                
                                 <asp:Label ID="Label5" runat="server" Text='<%# Bind("IntStandBy_Horom") %>'></asp:Label>
-                                &nbsp;<asp:ImageButton ID="ImgObserva" runat="server" Height="25px" ImageAlign="AbsMiddle" ImageUrl="~/Imagenes/t1.png" Visible="False" />
+                                &nbsp;<asp:ImageButton ID="ImgObserva" runat="server" Height="25px" ImageAlign="AbsMiddle" ImageUrl="~/Imagenes/t1.png" Visible="False"  onClick="ImgObserva_Click" />
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Horometro Inicial Extra" SortExpression="IntHoroIniExt_Horom">

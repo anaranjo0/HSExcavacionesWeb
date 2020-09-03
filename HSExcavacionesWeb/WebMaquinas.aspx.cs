@@ -8,6 +8,8 @@ using System.Data;
 using System.Data.SqlTypes;
 using ModeloBaseDatos;
 using System.Drawing;
+using System.Windows;
+
 
 namespace HSExcavacionesWeb
 {
@@ -257,7 +259,14 @@ namespace HSExcavacionesWeb
 
         }
 
-     
+        protected void ImgObserva_Click(object sender, ImageClickEventArgs e)
+        {
+            //Se abre la ventana en popup y se ajusta a un tamaño mas pequeño
+            string vtn = "window.open('WebObservaciones.aspx','mywindow','width=600,height=300')";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", vtn, true);
+
+            
+        }
     }
 
 }

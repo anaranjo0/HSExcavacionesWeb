@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MaintainScrollPositionOnPostback="true" MasterPageFile="~/HSExcavaciones.Master" AutoEventWireup="true" CodeBehind="WebMaquinas.aspx.cs" Inherits="HSExcavacionesWeb.WebMaquinas" %>
+﻿<%@ Page Title="" Language="C#" MaintainScrollPositionOnPostback="true"  EnableEventValidation="true" MasterPageFile="~/HSExcavaciones.Master" AutoEventWireup="true" CodeBehind="WebMaquinas.aspx.cs" Inherits="HSExcavacionesWeb.WebMaquinas" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     
@@ -47,10 +47,10 @@
        <div >
            
                 <div >
-                <asp:GridView ID="GRDmaquinaria" runat="server"  AutoGenerateColumns="false" DataSourceID="SQLDTGHorometro" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="IntCodigo_Horom" ForeColor="Black" GridLines="Vertical" Height="247px" ShowFooter="True" OnRowDataBound="GRDmaquinaria_RowDataBound" AllowPaging="false" OnDataBound="GRDmaquinaria_DataBound" PageSize="360"  >
+                <asp:GridView ID="GRDmaquinaria" runat="server"  AutoGenerateColumns="False" DataSourceID="SQLDTGHorometro" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="IntCodigo_Horom" ForeColor="Black" GridLines="Vertical" Height="247px" ShowFooter="True" OnRowDataBound="GRDmaquinaria_RowDataBound" OnDataBound="GRDmaquinaria_DataBound" PageSize="360"  >
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
-                        <asp:BoundField DataField="IntCodigo_Horom" SortExpression="IntCodigo_Horom" InsertVisible="False" ReadOnly="True" ShowHeader="False" Visible="False" />
+                        <asp:BoundField DataField="IntCodigo_Horom" SortExpression="IntCodigo_Horom" InsertVisible="False" ReadOnly="True" ShowHeader="False" Visible="False" HeaderText="IntCodigo_Horom" />
                         <asp:TemplateField HeaderText="Fecha" SortExpression="DtmFecha_Horom">
                             <EditItemTemplate>
                                 <asp:TextBox ID="txtEFecha" runat="server" CssClass="form-control" onKeyPress="return NumCheck(event,this)" Text='<%# Bind("FechaActualiza") %>' Width="180px"></asp:TextBox>

@@ -18,7 +18,12 @@ namespace HSExcavacionesWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session["Hfinal"] = "0";
+            if (!IsPostBack)
+            {
+                Session["Hfinal"] = "0";
+                Session["index"] = "1";
+            }
+       
           
            
         }
@@ -36,8 +41,14 @@ namespace HSExcavacionesWeb
            
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                
-                Label Horo = (Label)e.Row.FindControl("lblHinicial");
+
+              if(e.Row.RowIndex.ToString() == Session["index"].ToString())
+                {
+                    Session["index"] = e.Row.Cells[0].Text;
+                }
+
+
+                Label Horo = (Label)e.Row.DataItem("lblHinicial");
                 if (Horo != null & Session["Hfinal"].ToString() != "0")
                 {
                     Double Hini = Double.Parse(Horo.Text);
@@ -261,11 +272,24 @@ namespace HSExcavacionesWeb
 
         protected void ImgObserva_Click(object sender, ImageClickEventArgs e)
         {
-            //Se abre la ventana en popup y se ajusta a un tamaño mas pequeño
-            string vtn = "window.open('WebObservaciones.aspx','mywindow','width=600,height=300')";
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", vtn, true);
 
+            ImageButton btn = (ImageButton)sender;
+
+            //Get the row that contains this button
+            GridViewRow gvr = (GridViewRow)btn.NamingContainer;
+            //GRDmaquinaria.DataBind();
+            Session["index"]  = gvr.RowIndex;
+            GRDmaquinaria.DataBind();
             
+            
+            //int id = GRDmaquinaria.PageIndex;
+
+            //int codigo = Convert.ToInt32( (GRDmaquinaria.Rows[id].FindControl("IntCodigo_Horom") as TextBox).Text);
+            ////Se abre la ventana en popup y se ajusta a un tamaño mas pequeño
+            //string vtn = "window.open('WebObservaciones.aspx?"+ codigo +"','mywindow','width=600,height=300')";
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "popup", vtn, true);
+
+
         }
     }
 

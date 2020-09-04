@@ -34,10 +34,9 @@ namespace HSExcavacionesWeb
             List<string> Observa = maq.SelObserva(codHoro);
             foreach (string obs in Observa)
             {
-                //if (is null or empty obs.ToString() )
-                //{
-                //    txtObservacion.Text = obs.ToString();
-                //}
+               
+                txtObservacion.Text = obs;
+            
             }
         }
     }

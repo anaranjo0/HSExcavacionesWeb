@@ -156,21 +156,12 @@ namespace ModeloBaseDatos
             }
         }
 
-        public string SeleccionarObservacion(int codHoro)
+        public List<string> SeleccionarObserva(int CodHorom)
         {
-            using (DBHSExcavcionesEntities1 Horo = new DBHSExcavcionesEntities1())
+            using (DBHSExcavcionesEntities1 SelObra = new DBHSExcavcionesEntities1())
             {
-
-
-                try
-                {
-                    var Observa = Horo.Seleccionar_Observaciones(codHoro);
-                    return Observa.ToString();
-                }
-                catch (Exception e)
-                {
-                    return e.InnerException.ToString();
-                }
+                var obra = SelObra.Seleccionar_Observaciones(CodHorom);
+                return obra.ToList();
             }
         }
 

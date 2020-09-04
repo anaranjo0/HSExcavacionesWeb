@@ -38,11 +38,13 @@ namespace LibMaquinaria
             return resultado;
         }
 
-        public string SeleccionaObserva(int CodHoro)
+       
+        public List<string> SelObserva(int codHorom)
         {
-            ClsModelo mod = new ClsModelo();
-            string resultado = mod.SeleccionarObservacion(CodHoro);
-            return resultado;
+            ClsModelo SelCli = new ClsModelo();
+            var clientes = SelCli.SeleccionarObserva(codHorom);
+            return clientes.ToList();
+
         }
 
     }

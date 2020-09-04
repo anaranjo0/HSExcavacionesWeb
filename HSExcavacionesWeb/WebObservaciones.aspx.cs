@@ -31,7 +31,14 @@ namespace HSExcavacionesWeb
         {
             ClsMaquinaria maq = new ClsMaquinaria();
             int codHoro = Convert.ToInt32(Request.QueryString["codigo"]);
-            txtObservacion.Text = maq.SeleccionaObserva(codHoro);
+            List<string> Observa = maq.SelObserva(codHoro);
+            foreach (string obs in Observa)
+            {
+                //if (is null or empty obs.ToString() )
+                //{
+                //    txtObservacion.Text = obs.ToString();
+                //}
+            }
         }
     }
 }

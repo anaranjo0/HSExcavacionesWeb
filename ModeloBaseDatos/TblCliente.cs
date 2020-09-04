@@ -17,8 +17,8 @@ namespace ModeloBaseDatos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TblCliente()
         {
-            this.TblHorometro = new HashSet<TblHorometro>();
             this.TblObra = new HashSet<TblObra>();
+            this.TblHorometro = new HashSet<TblHorometro>();
         }
     
         public string StrDocumento_Cliente { get; set; }
@@ -27,8 +27,8 @@ namespace ModeloBaseDatos
         public string StrDireccion_Cliente { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TblHorometro> TblHorometro { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblObra> TblObra { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TblHorometro> TblHorometro { get; set; }
     }
 }

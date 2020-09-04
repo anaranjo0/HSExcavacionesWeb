@@ -25,7 +25,10 @@
                 <asp:TextBox ID="txtObservacion" runat="server" CssClass="form-control" Height="300px" TextMode="MultiLine" Width="600px"></asp:TextBox>
             </div>
             <div class="botonobserva">
-                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary" Height="50px" Width="100px" />
+                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary" Height="50px" Width="100px" OnClick="btnGuardar_Click" />
+            </div>
+             <div class="Multilinetexto">
+                <asp:Label ID="lblerror" runat="server" ForeColor="#CC0000"  />
             </div>
         </section>
     </form>

@@ -8,11 +8,11 @@
         <EntityTypeShape EntityType="DBHSExcavcionesModel.TblCliente" Width="1.5" PointX="0.75" PointY="3.875" />
         <EntityTypeShape EntityType="DBHSExcavcionesModel.TblMaquina" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="DBHSExcavcionesModel.TblObra" Width="1.5" PointX="0.75" PointY="7.25" />
-        <EntityTypeShape EntityType="DBHSExcavcionesModel.TblHorometro" Width="1.5" PointX="3" PointY="2.375" />
+        <AssociationConnector Association="DBHSExcavcionesModel.FK__TblObra__StrDocu__3C34F16F" />
+        <EntityTypeShape EntityType="DBHSExcavcionesModel.TblHorometro" Width="1.5" PointX="3" PointY="2.5" />
         <AssociationConnector Association="DBHSExcavcionesModel.FK_TblHorometro_TblCliente" />
         <AssociationConnector Association="DBHSExcavcionesModel.FK_TblHorometro_TblMaquina" />
         <AssociationConnector Association="DBHSExcavcionesModel.FK_TblHorometro_TblObra" />
-        <AssociationConnector Association="DBHSExcavcionesModel.FK__TblObra__StrDocu__3C34F16F" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

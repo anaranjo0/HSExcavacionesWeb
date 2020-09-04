@@ -32,6 +32,7 @@ namespace ModeloBaseDatos
         public string IntFactura_Horom { get; set; }
         public int Intcodigo_Obra { get; set; }
         public string StrDocumento_Cliente { get; set; }
+        public string strObservacion_Horom { get; set; }
     
         public virtual TblCliente TblCliente { get; set; }
         public virtual TblMaquina TblMaquina { get; set; }

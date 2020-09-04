@@ -25,8 +25,8 @@ namespace ModeloBaseDatos
         public string StrEncargado_Obra { get; set; }
         public string StrDocumento_Cliente { get; set; }
     
+        public virtual TblCliente TblCliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblHorometro> TblHorometro { get; set; }
-        public virtual TblCliente TblCliente { get; set; }
     }
 }

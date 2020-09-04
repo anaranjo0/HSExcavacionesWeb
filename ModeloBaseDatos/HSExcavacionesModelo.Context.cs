@@ -163,5 +163,27 @@ namespace ModeloBaseDatos
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Actualizar_Cliente", strDocumento_ClienteParameter, strNombre_ClienteParameter);
         }
+    
+        public virtual int Actualizar_Observaciones(Nullable<int> intCodigo_Horom, string strObservacion_Horom)
+        {
+            var intCodigo_HoromParameter = intCodigo_Horom.HasValue ?
+                new ObjectParameter("IntCodigo_Horom", intCodigo_Horom) :
+                new ObjectParameter("IntCodigo_Horom", typeof(int));
+    
+            var strObservacion_HoromParameter = strObservacion_Horom != null ?
+                new ObjectParameter("strObservacion_Horom", strObservacion_Horom) :
+                new ObjectParameter("strObservacion_Horom", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Actualizar_Observaciones", intCodigo_HoromParameter, strObservacion_HoromParameter);
+        }
+    
+        public virtual ObjectResult<string> Seleccionar_Observaciones(Nullable<int> intCodigo_Horom)
+        {
+            var intCodigo_HoromParameter = intCodigo_Horom.HasValue ?
+                new ObjectParameter("IntCodigo_Horom", intCodigo_Horom) :
+                new ObjectParameter("IntCodigo_Horom", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("Seleccionar_Observaciones", intCodigo_HoromParameter);
+        }
     }
 }

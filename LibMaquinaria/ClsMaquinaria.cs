@@ -29,10 +29,21 @@ namespace LibMaquinaria
         public int Obra { get; set; }
         public string Cliente { get; set; }
 
-        //public IEnumerable<ClsMaquinaria> CargarGrid()
-        //{
+        
 
-        //}
+        public string GuardarObserva(int CodHoro, string observa)
+        {
+            ClsModelo mod = new ClsModelo();
+            string resultado = mod.ActualizarObservacion(CodHoro, observa);
+            return resultado;
+        }
+
+        public string SeleccionaObserva(int CodHoro)
+        {
+            ClsModelo mod = new ClsModelo();
+            string resultado = mod.SeleccionarObservacion(CodHoro);
+            return resultado;
+        }
 
     }
 }

@@ -17,22 +17,6 @@ namespace ModeloBaseDatos
     {
 
 
-        //public string Fhorometro { get; set; }
-        //public decimal Hinicial { get; set; }
-        //public decimal Horofinal { get; set; }
-        //public decimal HorasOrdi { get; set; }
-        //public decimal Standby { get; set; }
-        //public decimal HoroIniExtra { get; set; }
-        //public decimal HoroFinExtra { get; set; }
-        //public decimal HoraIniExtra { get; set; }
-        //public decimal HoraFinalExtra { get; set; }
-        //public decimal HorasExtras { get; set; }
-        //public decimal HorasCobrar { get; set; }
-        //public decimal ValorHora { get; set; }
-        //public decimal Transporte { get; set; }
-        //public int Factura { get; set; }
-        //public int Obra { get; set; }
-        //public string Cliente { get; set; }
         public string strError { get; set; }
         public DataTable dtObras { get; set; }
 
@@ -153,7 +137,44 @@ namespace ModeloBaseDatos
                     return false;
                 }
         }
+
+        public string ActualizarObservacion(int codHoro,string Observa )
+        {
+            using (DBHSExcavcionesEntities1 Horo = new DBHSExcavcionesEntities1())
+            {
+
+
+                try
+                {
+                    var Horometro = Horo.Actualizar_Observaciones(codHoro,Observa);
+                    return "Actualizado Correctamente";
+                }
+                catch (Exception e)
+                {
+                    return e.InnerException.ToString();
+                }
+            }
+        }
+
+        public string SeleccionarObservacion(int codHoro)
+        {
+            using (DBHSExcavcionesEntities1 Horo = new DBHSExcavcionesEntities1())
+            {
+
+
+                try
+                {
+                    var Observa = Horo.Seleccionar_Observaciones(codHoro);
+                    return Observa.ToString();
+                }
+                catch (Exception e)
+                {
+                    return e.InnerException.ToString();
+                }
+            }
+        }
+
     }
 
-    
+
 }

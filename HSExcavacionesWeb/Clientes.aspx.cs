@@ -152,15 +152,12 @@ namespace HSExcavacionesWeb
                 txtNombreCliente.Text = cli.ToString();
             }
 
-            //List<string> obras = cliente.obras();
-            //grdClientes.DataSource = obras;
-            //grdClientes.DataBind();
-            //grdClientes.Visible = true;
+
             txtDocCliente.Enabled = false;
             lnkGuardar.Visible = true;
             lblObrasActuales.Visible = true;
             lblObrasNuevas.Visible = false;
-            //Session["gridObra"] = ListToDatatable(obras);
+ 
 
 
             grdConsultaObras.Visible = true;

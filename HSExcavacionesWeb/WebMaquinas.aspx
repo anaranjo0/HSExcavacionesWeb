@@ -102,6 +102,7 @@
                             </FooterTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="lblHinicial" runat="server" Text='<%# Bind("IntHoroIni_Horom") %>'></asp:Label>
+                                &nbsp;<asp:ImageButton ID="ImgObservaHoro" runat="server" Height="25px" ImageAlign="AbsMiddle" ImageUrl="~/Imagenes/t1.png" Visible="False"  onClick="ImgObserva_Click" />
                             </ItemTemplate>
                         </asp:TemplateField>
                        

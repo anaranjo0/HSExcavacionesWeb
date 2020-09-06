@@ -42,12 +42,7 @@ namespace HSExcavacionesWeb
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
 
-              //if(e.Row.RowIndex.ToString() == Session["index"].ToString())
-              //  {
-              //      Session["index"] = e.Row.Cells[0].Text;
-              //  }
-
-
+                // Identifica si el horometro final del dia anterior es diferente al inicial del siguiente dia
                 Label Horo = (Label)e.Row.FindControl("lblHinicial");
                 if (Horo != null & Session["Hfinal"].ToString() != "0")
                 {
@@ -55,6 +50,8 @@ namespace HSExcavacionesWeb
                     if (Hini != Convert.ToDouble(Session["Hfinal"]))
                     {
                         e.Row.Cells[3].BackColor = Color.FromName("#F78AC9");
+                        e.Row.FindControl("ImgObservaHoro").Visible = true;
+                        
                         Label Domingo = (Label)e.Row.FindControl("LblIFecha");
 
                         if (Domingo != null)

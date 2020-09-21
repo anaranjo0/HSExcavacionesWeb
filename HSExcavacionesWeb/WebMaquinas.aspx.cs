@@ -84,6 +84,17 @@ namespace HSExcavacionesWeb
                     Session["Hfinal"] = HfinalVal;
                 }
 
+                string lblObser = (e.Row.FindControl("lblObserva") as Label).Text;
+                if(lblObser != "")
+                {
+                    (e.Row.FindControl("lblObsSiNo") as Label).Text = "Si";
+
+                }
+                else
+                {
+                    (e.Row.FindControl("lblObsSiNo") as Label).Text = "No";
+                }
+
 
 
 

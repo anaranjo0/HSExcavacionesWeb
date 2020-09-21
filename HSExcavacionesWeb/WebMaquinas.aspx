@@ -299,6 +299,14 @@
                                 <asp:Label ID="Label16" runat="server" Text='<%# Bind("StrNombre_Cliente") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Observaciones" SortExpression="strObservacion_Horom">
+                            <ItemTemplate>
+                                <asp:Label ID="lblObserva" runat="server" Text='<%# Bind("strObservacion_Horom") %>' Visible="False"></asp:Label>
+                                <asp:Label ID="lblObsSiNo" runat="server"></asp:Label>
+                                &nbsp;<asp:ImageButton ID="ImgObservabtn" runat="server" Height="25px" ImageAlign="AbsMiddle" ImageUrl="~/Imagenes/t1.png" onClick="ImgObserva_Click" />
+                            </ItemTemplate>
+                            <ItemStyle HorizontalAlign="Center" />
+                        </asp:TemplateField>
                         <asp:TemplateField>
                             <FooterTemplate>
                                 <asp:LinkButton ID="LnkIngresar" runat="server" ForeColor="Black" OnClick="LnkIngresar_Click" ValidationGroup="Ingresar">Ingresar</asp:LinkButton>
@@ -332,7 +340,7 @@ AS IntHorasCobrar_Horom, TblHorometro.DblValorHora_Horom, (TblHorometro.IntStand
 TblHorometro.IntHoraIniExt_Horom)) * TblHorometro.DblValorHora_Horom AS Total_Horas, TblHorometro.DblTransporte_Horom, 
 (TblHorometro.IntStandBy_Horom + (TblHorometro.IntHoraFinExt_Horom - TblHorometro.IntHoraIniExt_Horom)) * TblHorometro.DblValorHora_Horom 
 + TblHorometro.DblTransporte_Horom AS Cobrar_Diario, trim(TblHorometro.IntFactura_Horom) as IntFactura_Horom, TblHorometro.Intcodigo_Obra, 
-TblHorometro.StrDocumento_Cliente, TblObra.StrNombre_Obra, TblCliente.StrNombre_Cliente,
+TblHorometro.StrDocumento_Cliente, TblObra.StrNombre_Obra, TblCliente.StrNombre_Cliente,TblHorometro.strObservacion_Horom,
 (select top 1 format((DATEADD(DAY,1,DtmFecha_Horom)),'dd/MM/yyyy') from TblHorometro where TblHorometro.IntCodigo_Maquina = @original_IntCodigo_Maquina order by DtmFecha_Horom desc) as FechaInsertar
 FROM TblHorometro INNER JOIN TblObra ON TblHorometro.Intcodigo_Obra = 
 TblObra.Intcodigo_Obra INNER JOIN TblCliente ON TblHorometro.StrDocumento_Cliente = TblCliente.StrDocumento_Cliente 

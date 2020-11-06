@@ -84,6 +84,9 @@
     <Compile Include="Seleccionar_Horas_Result1.cs">
       <DependentUpon>HSExcavacionesModelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Seleccionar_Obra_Result.cs">
+      <DependentUpon>HSExcavacionesModelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>HSExcavacionesModelo.tt</DependentUpon>
     </Compile>

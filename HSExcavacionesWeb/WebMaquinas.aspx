@@ -258,13 +258,43 @@
                                 <asp:Label ID="Label14" runat="server" Text='<%# Bind("IntFactura_Horom") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Obra" SortExpression="Intcodigo_Obra">
+
+                        <asp:TemplateField HeaderText="Cliente" SortExpression="StrDocumento_Cliente">
                             <EditItemTemplate>
-                               
                                 
-                                <asp:DropDownList ID="DPEObra" runat="server" CssClass="form-control" DataSourceID="SQLObra" DataTextField="StrNombre_Obra" DataValueField="Intcodigo_Obra" SelectedValue='<%# Bind("Intcodigo_Obra") %>' Width="90px">
+                                <asp:DropDownList ID="DPECliente" runat="server" CssClass="form-control" DataSourceID="SqlECliente" DataTextField="StrNombre_Cliente" DataValueField="StrDocumento_Cliente" SelectedValue='<%# Bind("StrDocumento_Cliente") %>' Width="90px" OnSelectedIndexChanged="DPECliente_SelectedIndexChanged" AutoPostBack="True">
+                                </asp:DropDownList>
+                                <asp:SqlDataSource ID="SqlECliente" runat="server" ConnectionString="<%$ ConnectionStrings:DBHSExcavcionesCOIMAQ %>" SelectCommand="SELECT [StrDocumento_Cliente], [StrNombre_Cliente] FROM [TblCliente] ORDER BY [StrNombre_Cliente]"></asp:SqlDataSource>
+                            </EditItemTemplate>
+                            <FooterTemplate>
+                               
+                                <asp:DropDownList ID="DPFCliente" runat="server" CssClass="form-control" DataSourceID="SqlFcliente" DataTextField="StrNombre_Cliente" DataValueField="StrDocumento_Cliente" Width="90px">
+                                </asp:DropDownList>
+                                <asp:SqlDataSource ID="SqlFcliente" runat="server" ConnectionString="<%$ ConnectionStrings:DBHSExcavcionesConnectionString %>" SelectCommand="SELECT [StrDocumento_Cliente], [StrNombre_Cliente] FROM [TblCliente] ORDER BY [StrNombre_Cliente]"></asp:SqlDataSource>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="DPFCliente" ErrorMessage="*" ForeColor="#CC0000" ValidationGroup="Ingresar"></asp:RequiredFieldValidator>
+
+                                
+
+                            </FooterTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label16" runat="server" Text='<%# Bind("StrNombre_Cliente") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Obra" >
+                            <EditItemTemplate>
+                               <asp:DropDownList ID="DPEObra" runat="server" CssClass="form-control"  DataTextField="StrNombre_Obra" DataValueField="Intcodigo_Obra" Width="90px" DataSourceID="Sqldpobra">
+                                </asp:DropDownList>
+                                
+                                <asp:SqlDataSource ID="Sqldpobra" runat="server" ConnectionString="<%$ ConnectionStrings:DBHSExcavcionesCOIMAQ %>" SelectCommand="SELECT [Intcodigo_Obra], [StrNombre_Obra] ">
+                                    
+                                </asp:SqlDataSource>
+                                
+                           <%--       <asp:DropDownList ID="DPEObra" runat="server" CssClass="form-control" DataSourceID="SQLObra" DataTextField="StrNombre_Obra" DataValueField="Intcodigo_Obra" SelectedValue='<%# Bind("Intcodigo_Obra") %>' Width="90px">
                                 </asp:DropDownList>
                                 <asp:SqlDataSource ID="SQLObra" runat="server" ConnectionString="<%$ ConnectionStrings:DBHSExcavcionesConnectionString %>" SelectCommand="SELECT [Intcodigo_Obra], [StrNombre_Obra] FROM [TblObra] ORDER BY [StrNombre_Obra]"></asp:SqlDataSource>
+                          --%>
+
+                      
                             </EditItemTemplate>
                             <FooterTemplate>
                                 
@@ -278,27 +308,6 @@
                             </ItemTemplate>
                         </asp:TemplateField>
 
-                        <asp:TemplateField HeaderText="Cliente" SortExpression="StrDocumento_Cliente">
-                            <EditItemTemplate>
-                                
-                                <asp:DropDownList ID="DPECliente" runat="server" CssClass="form-control" DataSourceID="SqlECliente" DataTextField="StrNombre_Cliente" DataValueField="StrDocumento_Cliente" SelectedValue='<%# Bind("StrDocumento_Cliente") %>' Width="90px">
-                                </asp:DropDownList>
-                                <asp:SqlDataSource ID="SqlECliente" runat="server" ConnectionString="<%$ ConnectionStrings:DBHSExcavcionesCOIMAQ %>" SelectCommand="SELECT [StrDocumento_Cliente], [StrNombre_Cliente] FROM [TblCliente] ORDER BY [StrNombre_Cliente]"></asp:SqlDataSource>
-                            </EditItemTemplate>
-                            <FooterTemplate>
-                                <%--<asp:TextBox ID="TxtFCliente" runat="server" CssClass="form-control" Text='<%# Bind("StrDocumento_Cliente") %>'></asp:TextBox>--%>
-                                <asp:DropDownList ID="DPFCliente" runat="server" CssClass="form-control" DataSourceID="SqlFcliente" DataTextField="StrNombre_Cliente" DataValueField="StrDocumento_Cliente" SelectedValue='<%# Bind("StrDocumento_Cliente") %>' Width="90px">
-                                </asp:DropDownList>
-                                <asp:SqlDataSource ID="SqlFcliente" runat="server" ConnectionString="<%$ ConnectionStrings:DBHSExcavcionesConnectionString %>" SelectCommand="SELECT [StrDocumento_Cliente], [StrNombre_Cliente] FROM [TblCliente] ORDER BY [StrNombre_Cliente]"></asp:SqlDataSource>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="DPFCliente" ErrorMessage="*" ForeColor="#CC0000" ValidationGroup="Ingresar"></asp:RequiredFieldValidator>
-
-                                
-
-                            </FooterTemplate>
-                            <ItemTemplate>
-                                <asp:Label ID="Label16" runat="server" Text='<%# Bind("StrNombre_Cliente") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
                         <asp:TemplateField HeaderText="Observaciones" SortExpression="strObservacion_Horom">
                             <ItemTemplate>
                                 <asp:Label ID="lblObserva" runat="server" Text='<%# Bind("strObservacion_Horom") %>' Visible="False"></asp:Label>
@@ -414,7 +423,7 @@ WHERE (IntCodigo_Horom = @original_IntCodigo_Horom)">
                         <asp:Parameter Name="DblValorHora_Horom" Type="Decimal" />
                         <asp:Parameter Name="DblTransporte_Horom" Type="Decimal" />
                         <asp:Parameter Name="IntFactura_Horom" Type="string" />
-                        <asp:Parameter Name="Intcodigo_Obra" Type="Int32" />
+                        <asp:Parameter Name="Intcodigo_Obra" Type="string" />
                         <asp:Parameter Name="StrDocumento_Cliente" Type="String" />
                         <asp:Parameter Name="original_IntCodigo_Horom" Type="Int32" />
                     </UpdateParameters>

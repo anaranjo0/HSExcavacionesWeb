@@ -14,7 +14,8 @@ namespace ModeloBaseDatos
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-    
+    using System.Data;
+
     public partial class DBHSExcavcionesEntities1 : DbContext
     {
         public DBHSExcavcionesEntities1()
@@ -184,6 +185,20 @@ namespace ModeloBaseDatos
                 new ObjectParameter("IntCodigo_Horom", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("Seleccionar_Observaciones", intCodigo_HoromParameter);
+        }
+    
+        public virtual ObjectResult<Seleccionar_Obra_Result> Seleccionar_Obra(string strDocumento_Cliente)
+        {
+            var strDocumento_ClienteParameter = strDocumento_Cliente != null ?
+                new ObjectParameter("StrDocumento_Cliente", strDocumento_Cliente) :
+                new ObjectParameter("StrDocumento_Cliente", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Seleccionar_Obra_Result>("Seleccionar_Obra", strDocumento_ClienteParameter);
+        }
+
+        public static implicit operator DBConcurrencyException(DBHSExcavcionesEntities1 v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

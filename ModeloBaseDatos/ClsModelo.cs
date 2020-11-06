@@ -97,11 +97,27 @@ namespace ModeloBaseDatos
             }
         }
 
+        //public IEnumerable<DataView> slobra(string docclien)
+        //{
+        //    using (DBHSExcavcionesEntities1 SelObra = new DBHSExcavcionesEntities1())
+        //    {
+        //     var obra = (from obras in SelObra.TblObra.AsEnumerable()
+        //                                    where obras.StrDocumento_Cliente == docclien
+        //                                       select obras);
+
+        //        return obra;
+
+
+
+
+        //    }
+        //}
+        
         public  List<string> SeleccionarObra(string docCliente)
         {
             using (DBHSExcavcionesEntities1 SelObra = new DBHSExcavcionesEntities1())
             {
-                var obra = SelObra.Seleccionar_Obras(docCliente);
+                var obra = SelObra.Seleccionar_Obras(docCliente).ToList();
                 return obra.ToList();
             }
         }

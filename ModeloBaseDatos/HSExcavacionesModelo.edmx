@@ -238,7 +238,10 @@
             <Parameter Name="strObservacion_Horom" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Seleccionar_Observaciones" ReturnType="Collection(String)">
-            <Parameter Name="IntCodigo_Horom" Mode="In" Type="Int32" />
+          <Parameter Name="IntCodigo_Horom" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Seleccionar_Obra" ReturnType="Collection(DBHSExcavcionesModel.Seleccionar_Obra_Result)">
+            <Parameter Name="StrDocumento_Cliente" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="Seleccionar_Horas_Result">
@@ -410,6 +413,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="Seleccionar_Obra_Result">
+          <Property Type="Int32" Name="Intcodigo_Obra" Nullable="false" />
+          <Property Type="String" Name="StrNombre_Obra" Nullable="false" MaxLength="200" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

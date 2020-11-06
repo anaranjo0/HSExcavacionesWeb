@@ -9,7 +9,8 @@ using System.Data.SqlTypes;
 using ModeloBaseDatos;
 using System.Drawing;
 using System.Windows;
-
+using LibMaquinaria;
+using System.Threading;
 
 namespace HSExcavacionesWeb
 {
@@ -50,7 +51,7 @@ namespace HSExcavacionesWeb
                     if (Hini != Convert.ToDouble(Session["Hfinal"]))
                     {
                         e.Row.Cells[3].BackColor = Color.FromName("#F78AC9");
-                        e.Row.FindControl("ImgObservaHoro").Visible = true;
+                        
                         
                         Label Domingo = (Label)e.Row.FindControl("LblIFecha");
 
@@ -88,11 +89,13 @@ namespace HSExcavacionesWeb
                 if(lblObser != "")
                 {
                     (e.Row.FindControl("lblObsSiNo") as Label).Text = "Si";
+                    e.Row.Cells[20].Font.Bold = true;
 
                 }
                 else
                 {
                     (e.Row.FindControl("lblObsSiNo") as Label).Text = "No";
+                    e.Row.Cells[20].Font.Bold = false;
                 }
 
 
@@ -106,7 +109,7 @@ namespace HSExcavacionesWeb
                     {
                         e.Row.Cells[6].BackColor = Color.FromName("#f55b5b");
                         Label Domingo = (Label)e.Row.FindControl("LblIFecha");
-                        e.Row.FindControl("ImgObserva").Visible = true;
+                      
                         
                         if (Domingo != null)
                         {
@@ -153,9 +156,19 @@ namespace HSExcavacionesWeb
 
         protected void LnkIngresar_Click(object sender, EventArgs e)
         {
+
+            Thread th = new Thread(() => { ingresarHoras(); });
+            th.Start();
+            th.Join();
+            
+
+        }
+
+        private void ingresarHoras()
+        {
             ClsModelo BDMod = new ClsModelo();
             lblError.Text = "";
-           
+
             string Fecha = (GRDmaquinaria.FooterRow.FindControl("TxtFFecha") as TextBox).Text;
             int CodMaq = Convert.ToInt32(DPMaquina.SelectedValue);
             decimal Hini = Convert.ToDecimal((GRDmaquinaria.FooterRow.FindControl("TxtFHinicial") as TextBox).Text);
@@ -174,17 +187,15 @@ namespace HSExcavacionesWeb
 
 
             string error = (BDMod.InsertarHoras(Fecha, CodMaq, Hini, HFin, Standby, HiniExtra, HfinExtra, HorainiEx, HorafinEx, Valorhora, TTE, Fact, Convert.ToInt32(Obra), Cliente));
-            if(error != "")
+            if (error != "")
             {
                 lblError.Text = error.ToString();
             }
-            
 
-            
+
+
             GRDmaquinaria.PageIndex = GRDmaquinaria.PageCount - 1;
             GRDmaquinaria.DataBind();
-           
-
         }
 
         protected void DPMaquina_SelectedIndexChanged(object sender, EventArgs e)
@@ -297,6 +308,64 @@ namespace HSExcavacionesWeb
 
 
         }
+
+        protected void DPECliente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string doccliente;
+            DataTable dtsObra = new DataTable();
+            dtsObra.Columns.Add("Intcodigo_Obra", typeof(string));
+            dtsObra.Columns.Add("StrNombre_Obra", typeof(string));
+
+            int Fila = GRDmaquinaria.EditIndex;
+            clsCiente obra = new clsCiente();
+
+            doccliente = (GRDmaquinaria.Rows[Fila].FindControl("DPECliente") as DropDownList).SelectedValue.ToString();
+
+            llenarcombo(doccliente, Fila);
+
+
+        }
+
+        private void  llenarcombo(string cedula, int fila)
+        {
+            DataTable dtsObra = new DataTable();
+            dtsObra.Columns.Add("Intcodigo_Obra", typeof(string));
+            dtsObra.Columns.Add("StrNombre_Obra", typeof(string));
+
+            DBHSExcavcionesEntities1 cliente = new DBHSExcavcionesEntities1();
+
+            var obras = (from c in cliente.TblObra
+                         where c.StrDocumento_Cliente == cedula
+                         select new { c.Intcodigo_Obra, c.StrNombre_Obra }).ToList();
+
+            
+
+
+            
+
+            for (int i=0; i < obras.Count; i++)
+            {
+                //creas una nueva row
+                DataRow row = dtsObra.NewRow();
+                //asignas el dato a cada columna de la row
+                row["Intcodigo_Obra"] = obras[i].Intcodigo_Obra;
+                row["StrNombre_Obra"] = obras[i].StrNombre_Obra;
+                dtsObra.Rows.Add(row);
+
+            }
+    
+
+            //(GRDmaquinaria.Rows[fila].FindControl("DPEObra") as DropDownList).DataSource = dtsObra;
+            //(GRDmaquinaria.Rows[fila].FindControl("DPEObra") as DropDownList).DataValueField = "Intcodigo_Obra";
+            //(GRDmaquinaria.Rows[fila].FindControl("DPEObra") as DropDownList).DataTextField = "StrNombre_Obra";
+            //(GRDmaquinaria.Rows[fila].FindControl("DPEObra") as DropDownList).DataBind();
+           
+
+
+
+        }
+
+       
     }
 
 }

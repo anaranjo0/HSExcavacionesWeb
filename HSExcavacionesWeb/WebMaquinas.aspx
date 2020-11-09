@@ -282,10 +282,10 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Obra" >
                             <EditItemTemplate>
-                               <asp:DropDownList ID="DPEObra" runat="server" CssClass="form-control"  DataTextField="StrNombre_Obra" DataValueField="Intcodigo_Obra" Width="90px" DataSourceID="Sqldpobra">
+                               <asp:DropDownList ID="DPEObra" runat="server" CssClass="form-control"  DataTextField="StrNombre_Obra" DataValueField="Intcodigo_Obra" Width="90px" DataSourceID="Sqldpobra" SelectedValue='<%# Bind("Intcodigo_Obra") %>'>
                                 </asp:DropDownList>
                                 
-                                <asp:SqlDataSource ID="Sqldpobra" runat="server" ConnectionString="<%$ ConnectionStrings:DBHSExcavcionesCOIMAQ %>" SelectCommand="SELECT [Intcodigo_Obra], [StrNombre_Obra] ">
+                                <asp:SqlDataSource ID="Sqldpobra" runat="server" ConnectionString="<%$ ConnectionStrings:DBHSExcavcionesCOIMAQ %>" SelectCommand="SELECT [Intcodigo_Obra], [StrNombre_Obra] FROM [TblObra] ORDER BY [StrNombre_Obra]">
                                     
                                 </asp:SqlDataSource>
                                 

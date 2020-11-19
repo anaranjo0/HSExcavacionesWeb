@@ -7,6 +7,7 @@ using System.Data.Linq;
 using System.Data.Linq.Mapping;
 using System.Reflection;
 using System.Data;
+using LibObras;
 
 namespace ModeloBaseDatos
 {
@@ -97,13 +98,13 @@ namespace ModeloBaseDatos
             }
         }
 
-        //public IEnumerable<DataView> slobra(string docclien)
+        //public ClsObra obra(string docclien)
         //{
         //    using (DBHSExcavcionesEntities1 SelObra = new DBHSExcavcionesEntities1())
         //    {
-        //     var obra = (from obras in SelObra.TblObra.AsEnumerable()
-        //                                    where obras.StrDocumento_Cliente == docclien
-        //                                       select obras);
+        //        var obra = (from obras in SelObra.TblObra.AsEnumerable()
+        //                    where obras.StrDocumento_Cliente == docclien
+        //                    select obras);
 
         //        return obra;
 
@@ -112,13 +113,22 @@ namespace ModeloBaseDatos
 
         //    }
         //}
-        
-        public  List<string> SeleccionarObra(string docCliente)
+
+        public  IEnumerable<ClsObra> SeleccionarObra(string docCliente)
         {
+            
             using (DBHSExcavcionesEntities1 SelObra = new DBHSExcavcionesEntities1())
             {
-                var obra = SelObra.Seleccionar_Obras(docCliente).ToList();
-                return obra.ToList();
+
+                IEnumerable<ClsObra> objobra = (from e in SelObra.TblObra
+                                                where e.StrDocumento_Cliente == docCliente
+                                                select new ClsObra
+                                                {
+                                                    int_codigoObra = e.Intcodigo_Obra,
+                                                    str_nombreObra = e.StrNombre_Obra
+                                                });
+                
+                return objobra.ToList();
             }
         }
 

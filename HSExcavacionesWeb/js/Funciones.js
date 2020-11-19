@@ -64,3 +64,9 @@ function NumCheck(e, field) {
 //    $('#GHead').css('top', $('#<%=GRDmaquinaria.ClientID%>').offset().top);
 
 //});
+
+function Alertando() {
+    var slt = document.getElementById('DPEObra');
+    var valor = slt.options[slt.selectedIndex].value;
+    document.getElementById('lblError').innerHTML = valor;
+}

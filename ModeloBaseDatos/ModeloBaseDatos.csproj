@@ -132,5 +132,11 @@
       <LastGenOutput>HSExcavacionesModelo.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LibObras\LibObras.csproj">
+      <Project>{cbadafe7-22b7-44e9-98ef-4ead5e050f94}</Project>
+      <Name>LibObras</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -11,6 +11,7 @@ using System.Drawing;
 using System.Windows;
 using LibMaquinaria;
 using System.Threading;
+using LibObras;
 
 namespace HSExcavacionesWeb
 {
@@ -311,17 +312,25 @@ namespace HSExcavacionesWeb
 
         protected void DPECliente_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string doccliente;
-            DataTable dtsObra = new DataTable();
-            dtsObra.Columns.Add("Intcodigo_Obra", typeof(string));
-            dtsObra.Columns.Add("StrNombre_Obra", typeof(string));
+            //string doccliente;
+            //int Fila = GRDmaquinaria.EditIndex;
 
-            int Fila = GRDmaquinaria.EditIndex;
-            clsCiente obra = new clsCiente();
+          
 
-            doccliente = (GRDmaquinaria.Rows[Fila].FindControl("DPECliente") as DropDownList).SelectedValue.ToString();
+            //ClsModelo model = new ClsModelo();
+          
+            
+            //clsCiente obra = new clsCiente();
 
-            llenarcombo(doccliente, Fila);
+            //doccliente = (GRDmaquinaria.Rows[Fila].FindControl("DPECliente") as DropDownList).SelectedValue.ToString();
+
+            //IEnumerable<ClsObra> Obras  = model.SeleccionarObra(doccliente);
+            //(GRDmaquinaria.Rows[Fila].FindControl("DPEObra") as DropDownList).DataSource = Obras;
+            //(GRDmaquinaria.Rows[Fila].FindControl("DPEObra") as DropDownList).DataValueField = "int_codigoObra";
+            //(GRDmaquinaria.Rows[Fila].FindControl("DPEObra") as DropDownList).DataTextField = "str_nombreObra";
+            //(GRDmaquinaria.Rows[Fila].FindControl("DPEObra") as DropDownList).DataBind();
+
+            
 
 
         }

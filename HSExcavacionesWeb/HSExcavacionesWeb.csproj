@@ -162,6 +162,10 @@
       <Project>{43e5a001-b7fc-4db9-aae1-b2c016f63532}</Project>
       <Name>LibMaquinaria</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LibObras\LibObras.csproj">
+      <Project>{CBADAFE7-22B7-44E9-98EF-4EAD5E050F94}</Project>
+      <Name>LibObras</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

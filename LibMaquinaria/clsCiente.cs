@@ -55,12 +55,12 @@ namespace LibMaquinaria
            
         }
 
-        public List<string> obras()
-        {
-            ClsModelo SelObra = new ClsModelo();
-            var obras = SelObra.SeleccionarObra(strDocCliente);
-            return obras.ToList();
-        }
+        //public List<string> obras()
+        //{
+        //    ClsModelo SelObra = new ClsModelo();
+        //    var obras = SelObra.SeleccionarObra(strDocCliente);
+        //    return obras.ToList();
+        //}
 
         public bool BorrarObra()
         {

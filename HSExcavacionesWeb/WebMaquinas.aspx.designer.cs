@@ -33,6 +33,24 @@ namespace HSExcavacionesWeb
         protected global::System.Web.UI.WebControls.SqlDataSource SqlMaquina;
 
         /// <summary>
+        /// Control DPaño.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DPaño;
+
+        /// <summary>
+        /// Control SqlAño.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlAño;
+
+        /// <summary>
         /// Control GRDmaquinaria.
         /// </summary>
         /// <remarks>
@@ -40,6 +58,15 @@ namespace HSExcavacionesWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GRDmaquinaria;
+
+        /// <summary>
+        /// Control Cod_Obra.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField Cod_Obra;
 
         /// <summary>
         /// Control ddlColors.

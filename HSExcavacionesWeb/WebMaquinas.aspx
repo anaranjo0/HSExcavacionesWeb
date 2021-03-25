@@ -40,21 +40,46 @@
             //document.getElementById('lblError').innerHTML = valor;
             alert(valor);
         }
-        </script>  
+
+
+        function obtenerObra(ddl)
+        {
+        <%--    var dpobra = document.getElementById("DPEObra");
+            var selectedOption = dpobra.options[dpobra.selectedIndex];
+            var selectedText = selectedOption.text;
+            var selectedValue = selectedOption.value;
+            document.getElementById("<%= Cod_Obra.ClientID %>").value = selectedValue;--%>
+
+            var id = ddl.id;
+            var selectedVal = ddl.value;
+            document.getElementById("<%= Cod_Obra.ClientID %>").value = selectedVal;
+           
+            
+        }
+    </script>
 
     <script runat="server">
 
-        void DPEobra_SelectedIndexChanged(object sender, EventArgs e)
+
+        void DPEobra_SelectedIndexChanged(object sender, EventArgs e, GridViewSelectEventArgs f)
         {
             //int Fila = GRDmaquinaria.EditIndex;
             //var intobra = (GRDmaquinaria.Rows[Fila].FindControl("DPEobra") as DropDownList).SelectedValue.ToString();
 
 
+            int index = GRDmaquinaria.EditIndex;
+            GridViewRow row = GRDmaquinaria.Rows[index];
+            DropDownList Dpobra = (DropDownList)row.FindControl("DPEObra");
+
+            (GRDmaquinaria.FindControl("Cod_Obra") as HiddenField).Value = Dpobra.SelectedValue;
+
 
 
         }
 
-        void GRDmaquinaria_RowUpdating (Object sender, GridViewUpdateEventArgs e)
+
+
+        void GRDmaquinaria_RowUpdating(Object sender, GridViewUpdateEventArgs e)
         {
             //string doccliente;
             //ModeloBaseDatos.ClsModelo model = new ModeloBaseDatos.ClsModelo();
@@ -92,12 +117,16 @@
             // parameter names declared in the parameterized update query 
             // string for the key names.
             //if (Dpobra.SelectedValue != null)
+            //{
+
             //    e.NewValues["Intcodigo_Obra"] = Dpobra.SelectedValue;
+            //}
+            //(GRDmaquinaria.FindControl("Cod_Obra") as HiddenField).Value = Dpobra.SelectedValue;
 
 
         }
 
-</script>
+    </script>
 
 
     <section class="section-dropdown">
@@ -113,6 +142,16 @@
                 <asp:ListItem Selected="True">Seleccionar</asp:ListItem>
             </asp:DropDownList>
             <asp:SqlDataSource ID="SqlMaquina" runat="server" ConnectionString="<%$ ConnectionStrings:DBHSExcavcionesConnectionString %>" SelectCommand="SELECT [IntCodigo_Maquina], [StrNombre_Maquina] FROM [TblMaquina] ORDER BY [StrNombre_Maquina] ASC"></asp:SqlDataSource>
+        </div>
+        <div>
+            <div>Año</div>
+        </div>
+        <div>
+            <asp:DropDownList ID="DPaño" runat="server" CssClass="form-control" Width="400px" DataSourceID="SqlAño" DataTextField="año" DataValueField="año" AutoPostBack="True" OnSelectedIndexChanged="DPMaquina_SelectedIndexChanged">
+                <asp:ListItem Selected="True">Seleccionar</asp:ListItem>
+            </asp:DropDownList>
+            <asp:SqlDataSource ID="SqlAño" runat="server" ConnectionString="<%$ ConnectionStrings:DBHSExcavcionesConnectionString %>" SelectCommand="select distinct(DATEPART(YEAR,DtmFecha_Horom)) as año
+from TblHorometro"></asp:SqlDataSource>
         </div>
     </section>
 
@@ -341,7 +380,7 @@
                             </EditItemTemplate>
                             <FooterTemplate>
 
-                                <asp:DropDownList ID="DPFCliente" runat="server" CssClass="form-control" Width="90px">
+                                <asp:DropDownList ID="DPFCliente" runat="server" CssClass="form-control" Width="90px" DataSourceID="SqlFcliente" DataTextField="StrNombre_Cliente" DataValueField="StrDocumento_Cliente" AutoPostBack="True">
                                 </asp:DropDownList>
                                 <asp:SqlDataSource ID="SqlFcliente" runat="server" ConnectionString="<%$ ConnectionStrings:DBHSExcavcionesConnectionString %>" SelectCommand="SELECT [StrDocumento_Cliente], [StrNombre_Cliente] FROM [TblCliente] ORDER BY [StrNombre_Cliente]"></asp:SqlDataSource>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="DPFCliente" ErrorMessage="*" ForeColor="#CC0000" ValidationGroup="Ingresar"></asp:RequiredFieldValidator>
@@ -355,25 +394,33 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Obra" SortExpression="Intcodigo_Obra">
                             <EditItemTemplate>
-                                <asp:DropDownList ID="DPEObra" runat="server" CssClass="form-control" DataSourceID="SQLFObraprueba" DataTextField="StrNombre_Obra" DataValueField="Intcodigo_Obra" SelectedValue='<%# Bind("Intcodigo_Obra") %>' Width="90px"> 
+                                <asp:dropdownlist id="DPEObra" runat="server" cssclass="form-control" datasourceid="SQLFObraprueba" datatextfield="StrNombre_Obra" datavaluefield="Intcodigo_Obra"  onchange="obtenerObra(this)" width="90px" AutoPostBack="True"> 
                                 
-                                </asp:DropDownList>
-                                
+                                </asp:dropdownlist>
                                
-                               
+                                                               
                                 <asp:SqlDataSource ID="SQLFObraprueba" runat="server" ConnectionString="<%$ ConnectionStrings:DBHSExcavcionesConnectionString %>" SelectCommand="SELECT [Intcodigo_Obra], [StrNombre_Obra] FROM [TblObra] where [StrDocumento_Cliente] = @StrDoc_Cliente  ORDER BY [StrNombre_Obra]">
-                                  <SelectParameters>
-                                    <asp:ControlParameter ControlID="DPECliente" Name="StrDoc_Cliente" PropertyName="SelectedValue" Type="String" />
-                                </SelectParameters>  
-
+                                    <SelectParameters>
+                                        <asp:ControlParameter ControlID="DPECliente" Name="StrDoc_Cliente" PropertyName="SelectedValue" Type="String" />
+                                       
+                                    </SelectParameters>
+                                    <UpdateParameters>
+                                         <asp:ControlParameter ControlID="DPEObra" Name="StrDoc_obra" PropertyName="SelectedValue" Type="String" />
+                                    </UpdateParameters>
+                                    
                                 </asp:SqlDataSource>
+
+                                
                             </EditItemTemplate>
                             <FooterTemplate>
 
-                                <asp:DropDownList ID="DPFObra" runat="server" CssClass="form-control" DataSourceID="SQLFObra" DataTextField="StrNombre_Obra" DataValueField="Intcodigo_Obra" Width="110px">
+                                <asp:DropDownList ID="DPFObra" runat="server" CssClass="form-control" DataSourceID="SQLFOObra" DataTextField="StrNombre_Obra" DataValueField="Intcodigo_Obra"  Width="110px">
                                 </asp:DropDownList>
-                                <br />
-                                <asp:SqlDataSource ID="SQLFObra" runat="server" ConnectionString="<%$ ConnectionStrings:DBHSExcavcionesConnectionString %>" SelectCommand="SELECT [Intcodigo_Obra], [StrNombre_Obra] FROM [TblObra] ORDER BY [StrNombre_Obra]"></asp:SqlDataSource>
+                                <asp:SqlDataSource ID="SQLFOObra" runat="server" ConnectionString="<%$ ConnectionStrings:DBHSExcavcionesConnectionString %>" SelectCommand="SELECT [Intcodigo_Obra], [StrNombre_Obra] FROM [TblObra] where [StrDocumento_Cliente] = @StrDoc_ClienteFooter  ORDER BY [StrNombre_Obra]">
+                                    <SelectParameters>
+                                        <asp:ControlParameter ControlID="DPFCliente" Name="StrDoc_ClienteFooter" PropertyName="SelectedValue" Type="String" />
+                                    </SelectParameters>
+                                </asp:SqlDataSource>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator20" runat="server" ControlToValidate="DPFObra" ErrorMessage="*" ForeColor="#CC0000" ValidationGroup="Ingresar"></asp:RequiredFieldValidator>
                             </FooterTemplate>
                             <ItemTemplate>
@@ -408,19 +455,20 @@
                     <SortedDescendingHeaderStyle BackColor="#575357" />
                 </asp:GridView>
             </div>
-           
-   <asp:DropDownList ID="ddlColors" runat="server" onchange="Alertando()">  
-  
-                                <asp:ListItem Text="Select" Value="0" />  
-  
-                                <asp:ListItem Text="Red" Value="11" />  
-  
-                                <asp:ListItem Text="Green" Value="22" />  
-  
-                                <asp:ListItem Text="Blue" Value="33" />  
-  
-                            </asp:DropDownList>  
-                         
+             <asp:HiddenField ID="Cod_Obra" runat="server" Value='<%# Bind("Intcodigo_Obra") %>'  />
+
+            <asp:DropDownList ID="ddlColors" runat="server" onchange="Alertando()">
+
+                <asp:ListItem Text="Select" Value="0" />
+
+                <asp:ListItem Text="Red" Value="11" />
+
+                <asp:ListItem Text="Green" Value="22" />
+
+                <asp:ListItem Text="Blue" Value="33" />
+
+            </asp:DropDownList>
+
             <div class="error">
                 <asp:Label ID="lblError" runat="server"></asp:Label>
             </div>
@@ -439,11 +487,11 @@ TblHorometro.StrDocumento_Cliente, TblObra.StrNombre_Obra, TblCliente.StrNombre_
 (select top 1 format((DATEADD(DAY,1,DtmFecha_Horom)),'dd/MM/yyyy') from TblHorometro where TblHorometro.IntCodigo_Maquina = @original_IntCodigo_Maquina order by DtmFecha_Horom desc) as FechaInsertar
 FROM TblHorometro INNER JOIN TblObra ON TblHorometro.Intcodigo_Obra = 
 TblObra.Intcodigo_Obra INNER JOIN TblCliente ON TblHorometro.StrDocumento_Cliente = TblCliente.StrDocumento_Cliente 
-WHERE (TblHorometro.IntCodigo_Maquina = @original_IntCodigo_Maquina) ORDER BY TblHorometro.DtmFecha_Horom ASC
+WHERE (TblHorometro.IntCodigo_Maquina = @original_IntCodigo_Maquina and DATEPART(YEAR,TblHorometro.DtmFecha_Horom)= @original_año)  ORDER BY TblHorometro.DtmFecha_Horom ASC
 
 "
-                ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [TblHorometro] WHERE [IntCodigo_Horom] = @original_IntCodigo_Horom AND [DtmFecha_Horom] = @original_DtmFecha_Horom AND [IntCodigo_Maquina] = @original_IntCodigo_Maquina AND [IntHoroIni_Horom] = @original_IntHoroIni_Horom AND [IntHoroFin_Horom] = @original_IntHoroFin_Horom AND [IntHorasOrdina_Horom] = @original_IntHorasOrdina_Horom AND [IntStandBy_Horom] = @original_IntStandBy_Horom AND [IntHoroIniExt_Horom] = @original_IntHoroIniExt_Horom AND [IntHoroFinExt_Horom] = @original_IntHoroFinExt_Horom AND [IntHoraIniExt_Horom] = @original_IntHoraIniExt_Horom AND [IntHoraFinExt_Horom] = @original_IntHoraFinExt_Horom AND [IntHorasExtras_Horom] = @original_IntHorasExtras_Horom AND [IntHorasCobrar_Horom] = @original_IntHorasCobrar_Horom AND [DblValorHora_Horom] = @original_DblValorHora_Horom AND [DblTransporte_Horom] = @original_DblTransporte_Horom AND [IntFactura_Horom] = @original_IntFactura_Horom AND [Intcodigo_Obra] = @original_Intcodigo_Obra AND [StrDocumento_Cliente] = @original_StrDocumento_Cliente" InsertCommand="INSERT INTO [TblHorometro] ([DtmFecha_Horom], [IntCodigo_Maquina], [IntHoroIni_Horom], [IntHoroFin_Horom], [IntHorasOrdina_Horom], [IntStandBy_Horom], [IntHoroIniExt_Horom], [IntHoroFinExt_Horom], [IntHoraIniExt_Horom], [IntHoraFinExt_Horom], [IntHorasExtras_Horom], [IntHorasCobrar_Horom], [DblValorHora_Horom], [DblTransporte_Horom], [IntFactura_Horom], [Intcodigo_Obra], [StrDocumento_Cliente]) VALUES (@DtmFecha_Horom, @IntCodigo_Maquina, @IntHoroIni_Horom, @IntHoroFin_Horom, @IntHorasOrdina_Horom, @IntStandBy_Horom, @IntHoroIniExt_Horom, @IntHoroFinExt_Horom, @IntHoraIniExt_Horom, @IntHoraFinExt_Horom, @IntHorasExtras_Horom, @IntHorasCobrar_Horom, @DblValorHora_Horom, @DblTransporte_Horom, @IntFactura_Horom, @Intcodigo_Obra, @StrDocumento_Cliente)" OldValuesParameterFormatString="original_{0}" 
- UpdateCommand="UPDATE TblHorometro SET DtmFecha_Horom = CONVERT(DATETIME,@FechaActualiza,103), 
+ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [TblHorometro] WHERE [IntCodigo_Horom] = @original_IntCodigo_Horom AND [DtmFecha_Horom] = @original_DtmFecha_Horom AND [IntCodigo_Maquina] = @original_IntCodigo_Maquina AND [IntHoroIni_Horom] = @original_IntHoroIni_Horom AND [IntHoroFin_Horom] = @original_IntHoroFin_Horom AND [IntHorasOrdina_Horom] = @original_IntHorasOrdina_Horom AND [IntStandBy_Horom] = @original_IntStandBy_Horom AND [IntHoroIniExt_Horom] = @original_IntHoroIniExt_Horom AND [IntHoroFinExt_Horom] = @original_IntHoroFinExt_Horom AND [IntHoraIniExt_Horom] = @original_IntHoraIniExt_Horom AND [IntHoraFinExt_Horom] = @original_IntHoraFinExt_Horom AND [IntHorasExtras_Horom] = @original_IntHorasExtras_Horom AND [IntHorasCobrar_Horom] = @original_IntHorasCobrar_Horom AND [DblValorHora_Horom] = @original_DblValorHora_Horom AND [DblTransporte_Horom] = @original_DblTransporte_Horom AND [IntFactura_Horom] = @original_IntFactura_Horom AND [Intcodigo_Obra] = @original_Intcodigo_Obra AND [StrDocumento_Cliente] = @original_StrDocumento_Cliente" InsertCommand="INSERT INTO [TblHorometro] ([DtmFecha_Horom], [IntCodigo_Maquina], [IntHoroIni_Horom], [IntHoroFin_Horom], [IntHorasOrdina_Horom], [IntStandBy_Horom], [IntHoroIniExt_Horom], [IntHoroFinExt_Horom], [IntHoraIniExt_Horom], [IntHoraFinExt_Horom], [IntHorasExtras_Horom], [IntHorasCobrar_Horom], [DblValorHora_Horom], [DblTransporte_Horom], [IntFactura_Horom], [Intcodigo_Obra], [StrDocumento_Cliente]) VALUES (@DtmFecha_Horom, @IntCodigo_Maquina, @IntHoroIni_Horom, @IntHoroFin_Horom, @IntHorasOrdina_Horom, @IntStandBy_Horom, @IntHoroIniExt_Horom, @IntHoroFinExt_Horom, @IntHoraIniExt_Horom, @IntHoraFinExt_Horom, @IntHorasExtras_Horom, @IntHorasCobrar_Horom, @DblValorHora_Horom, @DblTransporte_Horom, @IntFactura_Horom, @Intcodigo_Obra, @StrDocumento_Cliente)" OldValuesParameterFormatString="original_{0}"
+UpdateCommand="UPDATE TblHorometro SET DtmFecha_Horom = CONVERT(DATETIME,@FechaActualiza,103), 
 IntHoroIni_Horom = @IntHoroIni_Horom, 
 IntHoroFin_Horom = @IntHoroFin_Horom, 
 IntStandBy_Horom = @IntStandBy_Horom, 
@@ -454,7 +502,7 @@ IntHoraFinExt_Horom = @IntHoraFinExt_Horom,
 DblValorHora_Horom = @DblValorHora_Horom, 
 DblTransporte_Horom = @DblTransporte_Horom, 
 IntFactura_Horom = @IntFactura_Horom, 
-Intcodigo_Obra = @Intcodigo_Obra, 
+Intcodigo_Obra = @StrDoc_obra, 
 StrDocumento_Cliente = @StrDocumento_Cliente 
 WHERE (IntCodigo_Horom = @original_IntCodigo_Horom)">
                 <DeleteParameters>
@@ -498,6 +546,7 @@ WHERE (IntCodigo_Horom = @original_IntCodigo_Horom)">
                 </InsertParameters>
                 <SelectParameters>
                     <asp:ControlParameter ControlID="DPMaquina" Name="original_IntCodigo_Maquina" PropertyName="SelectedValue" />
+                    <asp:ControlParameter ControlID="DPaño" Name="original_año" PropertyName="SelectedValue" />
                 </SelectParameters>
                 <UpdateParameters>
                     <asp:Parameter Name="FechaActualiza" />
@@ -512,6 +561,7 @@ WHERE (IntCodigo_Horom = @original_IntCodigo_Horom)">
                     <asp:Parameter Name="DblTransporte_Horom" Type="Decimal" />
                     <asp:Parameter Name="IntFactura_Horom" Type="string" />
                     <asp:Parameter Name="Intcodigo_Obra" Type="string" />
+                    
                     <asp:Parameter Name="StrDocumento_Cliente" Type="String" />
                     <asp:Parameter Name="original_IntCodigo_Horom" Type="Int32" />
                 </UpdateParameters>

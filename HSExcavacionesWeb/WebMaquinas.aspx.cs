@@ -201,7 +201,7 @@ namespace HSExcavacionesWeb
 
         protected void DPMaquina_SelectedIndexChanged(object sender, EventArgs e)
         {
-            GRDmaquinaria.PageIndex = GRDmaquinaria.PageCount - 1;
+            //GRDmaquinaria.PageIndex = GRDmaquinaria.PageCount - 1;
         }
 
         protected void TxtFHfinal_TextChanged(object sender, EventArgs e)
@@ -221,26 +221,32 @@ namespace HSExcavacionesWeb
         protected void cargarvalor()
         {
 
+            try
+            {
+                int ultfila = Convert.ToInt32(GRDmaquinaria.Rows.Count - 1);
+                Label HEFinal = (Label)GRDmaquinaria.Rows[ultfila].FindControl("lblHFinalExtra");
+                Label ValorHora = (Label)GRDmaquinaria.Rows[ultfila].FindControl("lblValorHora");
+                Label Fecha = (Label)GRDmaquinaria.Rows[ultfila].FindControl("lblFeIngreso");
 
-            int ultfila = Convert.ToInt32(GRDmaquinaria.Rows.Count - 1);
-            Label HEFinal = (Label)GRDmaquinaria.Rows[ultfila].FindControl("lblHFinalExtra");
-            Label ValorHora = (Label)GRDmaquinaria.Rows[ultfila].FindControl("lblValorHora");
-            Label Fecha = (Label)GRDmaquinaria.Rows[ultfila].FindControl("lblFeIngreso");
-            
 
-            if (HEFinal != null)
-            {
-                (GRDmaquinaria.FooterRow.FindControl("TxtFHinicial") as TextBox).Text = HEFinal.Text.ToString();
+                if (HEFinal != null)
+                {
+                    (GRDmaquinaria.FooterRow.FindControl("TxtFHinicial") as TextBox).Text = HEFinal.Text.ToString();
+                }
+                if (ValorHora != null)
+                {
+                    string VHora = ValorHora.Text.ToString();
+                    double val = Convert.ToDouble(VHora.Trim(new char[] { '$', ' ' }));
+                    (GRDmaquinaria.FooterRow.FindControl("TxtValorHora") as TextBox).Text = val.ToString();
+                }
+                if (Fecha != null)
+                {
+                    (GRDmaquinaria.FooterRow.FindControl("TxtFFecha") as TextBox).Text = Fecha.Text.ToString();
+                }
             }
-            if (ValorHora != null)
+            catch(Exception e)
             {
-                string VHora = ValorHora.Text.ToString();
-                double val = Convert.ToDouble(VHora.Trim(new char[] {'$', ' ' }));
-                (GRDmaquinaria.FooterRow.FindControl("TxtValorHora") as TextBox).Text = val.ToString();
-            }
-            if (Fecha != null)
-            {
-                (GRDmaquinaria.FooterRow.FindControl("TxtFFecha") as TextBox).Text = Fecha.Text.ToString();
+
             }
 
         }

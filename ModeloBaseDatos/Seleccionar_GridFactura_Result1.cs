@@ -10,13 +10,11 @@
 namespace ModeloBaseDatos
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class TblHorometro
+    public partial class Seleccionar_GridFactura_Result1
     {
-        public int IntCodigo_Horom { get; set; }
-        public System.DateTime DtmFecha_Horom { get; set; }
-        public int IntCodigo_Maquina { get; set; }
+        public string IntFactura_Horom { get; set; }
+        public string DtmFecha_Horom { get; set; }
         public Nullable<decimal> IntHoroIni_Horom { get; set; }
         public Nullable<decimal> IntHoroFin_Horom { get; set; }
         public Nullable<decimal> IntHorasOrdina_Horom { get; set; }
@@ -27,15 +25,9 @@ namespace ModeloBaseDatos
         public Nullable<decimal> IntHoraFinExt_Horom { get; set; }
         public Nullable<decimal> IntHorasExtras_Horom { get; set; }
         public Nullable<decimal> IntHorasCobrar_Horom { get; set; }
-        public decimal DblValorHora_Horom { get; set; }
         public Nullable<decimal> DblTransporte_Horom { get; set; }
-        public string IntFactura_Horom { get; set; }
-        public int Intcodigo_Obra { get; set; }
-        public string StrDocumento_Cliente { get; set; }
-        public string strObservacion_Horom { get; set; }
-    
-        public virtual TblCliente TblCliente { get; set; }
-        public virtual TblObra TblObra { get; set; }
-        public virtual TblMaquina TblMaquina { get; set; }
+        public decimal DblValorHora_Horom { get; set; }
+        public Nullable<decimal> Total_Horas { get; set; }
+        public Nullable<decimal> Valor { get; set; }
     }
 }

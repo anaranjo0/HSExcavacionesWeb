@@ -29,7 +29,13 @@ namespace LibMaquinaria
         public int Obra { get; set; }
         public string Cliente { get; set; }
 
-        
+        public int codMaquina { get; set; }
+
+        public string strError { get; set; }
+        public string strNombreMaquina { get; set; }
+        public string strModeloMaquina { get; set; }
+        public int IntEstadoMaquina { get; set; }
+
 
         public string GuardarObserva(int CodHoro, string observa)
         {
@@ -47,5 +53,62 @@ namespace LibMaquinaria
 
         }
 
+        public IEnumerable<ClsMaq> ConsultarMaq()
+        {
+            return ClsModelo.SelectMaquina(codMaquina);
+        }
+
+    
+
+        public List<string> ConsultaMaquinaHorom()
+        {
+            ClsModelo Cmaqu = new ClsModelo();
+            return Cmaqu.SeleccionarMaquinaHorometro(codMaquina);
+        }
+
+
+        public bool EliminarMaquinas()
+        {
+            ClsModelo maq = new ClsModelo();
+
+            if(maq.BorrarMaquinas(codMaquina))
+            {
+                return true;
+            }
+            else
+            {
+                strError = maq.strError;
+                return false;
+            }
+
+        }
+
+        public bool InsertarMaquina()
+        {
+            ClsModelo maq = new ClsModelo();
+            if(maq.insertarMaquina(strNombreMaquina, strModeloMaquina, IntEstadoMaquina))
+            {
+                return true;
+            }
+            else
+            {
+                strError = maq.strError;
+                return false;
+            }
+        }
+
+        public bool ActualizarMaquina()
+        {
+            ClsModelo maq = new ClsModelo();
+            if (maq.actualizarMaquina(codMaquina, strNombreMaquina, strModeloMaquina, IntEstadoMaquina))
+            {
+                return true;
+            }
+            else
+            {
+                strError = maq.strError;
+                return false;
+            }
+        }
     }
 }

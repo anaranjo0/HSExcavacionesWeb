@@ -1,15 +1,4 @@
-﻿//const empresa = document.getElementById('empre');
-//empresa.innerHTML = '@System.Configuration.ConfigurationManager.AppSettings["Empresa"]';
-
-//function formatCurrency(number) {
-//    var formatted = new Intl.NumberFormat("es-CO", {
-//        style: 'currency',
-//        currency: "COP",
-//        minimumFractionDigits: 2
-//    }).format(number);
-//    return formatted;
-//}
-
+﻿
 
 
 function soloNumeros(e) {
@@ -52,15 +41,28 @@ function NumCheck(e, field) {
     return false;
 }
 
-//$(document).ready(function () {
-//    var gridHeader = $('#<%=GRDmaquinaria.ClientID%>').clone(true); // Here Clone Copy of Gridview with style
-//    $(gridHeader).find("tr:gt(0)").remove(); // Here remove all rows except first row (header row)
-//    $('#<%=GRDmaquinaria.ClientID%> tr th').each(function (i) {
-//        // Here Set Width of each th from gridview to new table(clone table) th 
-//        $("th:nth-child(" + (i + 1) + ")", gridHeader).css('width', ($(this).width()).toString() + "px");
-//    });
-//    $("#GHead").append(gridHeader);
-//    $('#GHead').css('position', 'absolute');
-//    $('#GHead').css('top', $('#<%=GRDmaquinaria.ClientID%>').offset().top);
+function confirmacion() {
+    var answer = confirm("Seguro desea continuar?")
+    if (answer == true) {
+        ShowProgress();
+        return true;
+    }
+    else { return false; }
 
-//});
+}
+
+function ShowProgress() {
+    setTimeout(function () {
+        var loading = $(".loading");
+        loading.css("vertical-align", "middle");
+        loading.css("horizontal-align", "middle");
+        loading.css("display", "table-cell");
+        var top = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+        var left = Math.max($(window).height() / 2 - loading[0].offsetHeight / 2, 0);
+        loading.css({ top: top, left: left });
+
+
+
+    }, 100);
+}
+

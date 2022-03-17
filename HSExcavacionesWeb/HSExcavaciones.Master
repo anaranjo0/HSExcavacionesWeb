@@ -37,6 +37,7 @@
                                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                                 <a class="dropdown-item" href="/WebMaquinas.aspx">Horometro</a>
                                                 <a class="dropdown-item" href="Factura.aspx">Relación Factura</a>
+                                                <a class="dropdown-item" href="/Maquinas.aspx">Maquina</a>
                                             </div>
                                         </li>
                                         <li class="nav-item"><a class="nav-link" href="Clientes.aspx">Clientes</a> </li>

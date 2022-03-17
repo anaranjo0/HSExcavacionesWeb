@@ -14,8 +14,7 @@ namespace ModeloBaseDatos
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-    using System.Data;
-
+    
     public partial class DBHSExcavcionesEntities1 : DbContext
     {
         public DBHSExcavcionesEntities1()
@@ -29,9 +28,9 @@ namespace ModeloBaseDatos
         }
     
         public virtual DbSet<TblCliente> TblCliente { get; set; }
-        public virtual DbSet<TblMaquina> TblMaquina { get; set; }
         public virtual DbSet<TblObra> TblObra { get; set; }
         public virtual DbSet<TblHorometro> TblHorometro { get; set; }
+        public virtual DbSet<TblMaquina> TblMaquina { get; set; }
     
         public virtual int Insertar_Horas(Nullable<System.DateTime> dtmFecha_Horom, Nullable<int> intCodigo_Maquina, Nullable<decimal> intHoroIni_Horom, Nullable<decimal> intHoroFin_Horom, Nullable<decimal> intStandBy_Horom, Nullable<decimal> intHoroIniExt_Horom, Nullable<decimal> intHoroFinExt_Horom, Nullable<decimal> intHoraIniExt_Horom, Nullable<decimal> intHoraFinExt_Horom, Nullable<decimal> dblValorHora_Horom, Nullable<decimal> dblTransporte_Horom, string intFactura_Horom, Nullable<int> intcodigo_Obra, string strDocumento_Cliente)
         {
@@ -195,10 +194,311 @@ namespace ModeloBaseDatos
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Seleccionar_Obra_Result>("Seleccionar_Obra", strDocumento_ClienteParameter);
         }
-
-        public static implicit operator DBConcurrencyException(DBHSExcavcionesEntities1 v)
+    
+        public virtual int Actualizar_Obras(Nullable<int> intcodigo_Obra, string strNombre_Obra)
         {
-            throw new NotImplementedException();
+            var intcodigo_ObraParameter = intcodigo_Obra.HasValue ?
+                new ObjectParameter("Intcodigo_Obra", intcodigo_Obra) :
+                new ObjectParameter("Intcodigo_Obra", typeof(int));
+    
+            var strNombre_ObraParameter = strNombre_Obra != null ?
+                new ObjectParameter("StrNombre_Obra", strNombre_Obra) :
+                new ObjectParameter("StrNombre_Obra", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Actualizar_Obras", intcodigo_ObraParameter, strNombre_ObraParameter);
+        }
+    
+        public virtual ObjectResult<Seleccionar_GridFactura_Result1> Seleccionar_GridFactura(string intFactura_horometro, Nullable<int> intCodigo_Maquina)
+        {
+            var intFactura_horometroParameter = intFactura_horometro != null ?
+                new ObjectParameter("intFactura_horometro", intFactura_horometro) :
+                new ObjectParameter("intFactura_horometro", typeof(string));
+    
+            var intCodigo_MaquinaParameter = intCodigo_Maquina.HasValue ?
+                new ObjectParameter("intCodigo_Maquina", intCodigo_Maquina) :
+                new ObjectParameter("intCodigo_Maquina", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Seleccionar_GridFactura_Result1>("Seleccionar_GridFactura", intFactura_horometroParameter, intCodigo_MaquinaParameter);
+        }
+    
+        public virtual ObjectResult<Seleccionar_Maquinas_Result> Seleccionar_Maquinas(string intFactura_Horom)
+        {
+            var intFactura_HoromParameter = intFactura_Horom != null ?
+                new ObjectParameter("IntFactura_Horom", intFactura_Horom) :
+                new ObjectParameter("IntFactura_Horom", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Seleccionar_Maquinas_Result>("Seleccionar_Maquinas", intFactura_HoromParameter);
+        }
+    
+        public virtual ObjectResult<Seleccionar_ModuloMaquinas_Result> Seleccionar_ModuloMaquinas(Nullable<int> intCodigo_Maquina)
+        {
+            var intCodigo_MaquinaParameter = intCodigo_Maquina.HasValue ?
+                new ObjectParameter("IntCodigo_Maquina", intCodigo_Maquina) :
+                new ObjectParameter("IntCodigo_Maquina", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Seleccionar_ModuloMaquinas_Result>("Seleccionar_ModuloMaquinas", intCodigo_MaquinaParameter);
+        }
+    
+        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagramdefinition_Result1> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result1>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagrams_Result1> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result1>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var new_diagramnameParameter = new_diagramname != null ?
+                new ObjectParameter("new_diagramname", new_diagramname) :
+                new ObjectParameter("new_diagramname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
+        public virtual int sp_upgraddiagrams()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual int Eliminar_Maquinas(Nullable<int> intCodigo_Maquina)
+        {
+            var intCodigo_MaquinaParameter = intCodigo_Maquina.HasValue ?
+                new ObjectParameter("IntCodigo_Maquina", intCodigo_Maquina) :
+                new ObjectParameter("IntCodigo_Maquina", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Eliminar_Maquinas", intCodigo_MaquinaParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> Seleccionar_MaquinasHorometro(Nullable<int> intCodigo_Maquina)
+        {
+            var intCodigo_MaquinaParameter = intCodigo_Maquina.HasValue ?
+                new ObjectParameter("IntCodigo_Maquina", intCodigo_Maquina) :
+                new ObjectParameter("IntCodigo_Maquina", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Seleccionar_MaquinasHorometro", intCodigo_MaquinaParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> Seleccionar_MaquHorometro(Nullable<int> intCodigo_Maquina)
+        {
+            var intCodigo_MaquinaParameter = intCodigo_Maquina.HasValue ?
+                new ObjectParameter("IntCodigo_Maquina", intCodigo_Maquina) :
+                new ObjectParameter("IntCodigo_Maquina", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Seleccionar_MaquHorometro", intCodigo_MaquinaParameter);
+        }
+    
+        public virtual ObjectResult<string> Seleccionar_MHorometro(Nullable<int> intCodigo_Maquina)
+        {
+            var intCodigo_MaquinaParameter = intCodigo_Maquina.HasValue ?
+                new ObjectParameter("IntCodigo_Maquina", intCodigo_Maquina) :
+                new ObjectParameter("IntCodigo_Maquina", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("Seleccionar_MHorometro", intCodigo_MaquinaParameter);
+        }
+    
+        public virtual int Insertar_Maquina(string strNombre_Maquina, string strModelo_Maquina, Nullable<int> intEstado)
+        {
+            var strNombre_MaquinaParameter = strNombre_Maquina != null ?
+                new ObjectParameter("StrNombre_Maquina", strNombre_Maquina) :
+                new ObjectParameter("StrNombre_Maquina", typeof(string));
+    
+            var strModelo_MaquinaParameter = strModelo_Maquina != null ?
+                new ObjectParameter("StrModelo_Maquina", strModelo_Maquina) :
+                new ObjectParameter("StrModelo_Maquina", typeof(string));
+    
+            var intEstadoParameter = intEstado.HasValue ?
+                new ObjectParameter("IntEstado", intEstado) :
+                new ObjectParameter("IntEstado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insertar_Maquina", strNombre_MaquinaParameter, strModelo_MaquinaParameter, intEstadoParameter);
+        }
+    
+        public virtual int Insertar_Maquinas(string strNombre_Maquina, string strModelo_Maquina, Nullable<int> intEstado)
+        {
+            var strNombre_MaquinaParameter = strNombre_Maquina != null ?
+                new ObjectParameter("StrNombre_Maquina", strNombre_Maquina) :
+                new ObjectParameter("StrNombre_Maquina", typeof(string));
+    
+            var strModelo_MaquinaParameter = strModelo_Maquina != null ?
+                new ObjectParameter("StrModelo_Maquina", strModelo_Maquina) :
+                new ObjectParameter("StrModelo_Maquina", typeof(string));
+    
+            var intEstadoParameter = intEstado.HasValue ?
+                new ObjectParameter("IntEstado", intEstado) :
+                new ObjectParameter("IntEstado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insertar_Maquinas", strNombre_MaquinaParameter, strModelo_MaquinaParameter, intEstadoParameter);
+        }
+    
+        public virtual int Insertar_Maquinas1(string strNombre_Maquina, string strModelo_Maquina, Nullable<int> intEstado)
+        {
+            var strNombre_MaquinaParameter = strNombre_Maquina != null ?
+                new ObjectParameter("StrNombre_Maquina", strNombre_Maquina) :
+                new ObjectParameter("StrNombre_Maquina", typeof(string));
+    
+            var strModelo_MaquinaParameter = strModelo_Maquina != null ?
+                new ObjectParameter("StrModelo_Maquina", strModelo_Maquina) :
+                new ObjectParameter("StrModelo_Maquina", typeof(string));
+    
+            var intEstadoParameter = intEstado.HasValue ?
+                new ObjectParameter("IntEstado", intEstado) :
+                new ObjectParameter("IntEstado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insertar_Maquinas1", strNombre_MaquinaParameter, strModelo_MaquinaParameter, intEstadoParameter);
+        }
+    
+        public virtual int Insertar_Maquinas2(string strNombre_Maquina, string strModelo_Maquina, Nullable<int> intEstado)
+        {
+            var strNombre_MaquinaParameter = strNombre_Maquina != null ?
+                new ObjectParameter("StrNombre_Maquina", strNombre_Maquina) :
+                new ObjectParameter("StrNombre_Maquina", typeof(string));
+    
+            var strModelo_MaquinaParameter = strModelo_Maquina != null ?
+                new ObjectParameter("StrModelo_Maquina", strModelo_Maquina) :
+                new ObjectParameter("StrModelo_Maquina", typeof(string));
+    
+            var intEstadoParameter = intEstado.HasValue ?
+                new ObjectParameter("IntEstado", intEstado) :
+                new ObjectParameter("IntEstado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insertar_Maquinas2", strNombre_MaquinaParameter, strModelo_MaquinaParameter, intEstadoParameter);
+        }
+    
+        public virtual int Insertar_Maquinas3(string strNombre_Maquina, string strModelo_Maquina, Nullable<int> intEstado)
+        {
+            var strNombre_MaquinaParameter = strNombre_Maquina != null ?
+                new ObjectParameter("StrNombre_Maquina", strNombre_Maquina) :
+                new ObjectParameter("StrNombre_Maquina", typeof(string));
+    
+            var strModelo_MaquinaParameter = strModelo_Maquina != null ?
+                new ObjectParameter("StrModelo_Maquina", strModelo_Maquina) :
+                new ObjectParameter("StrModelo_Maquina", typeof(string));
+    
+            var intEstadoParameter = intEstado.HasValue ?
+                new ObjectParameter("IntEstado", intEstado) :
+                new ObjectParameter("IntEstado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insertar_Maquinas3", strNombre_MaquinaParameter, strModelo_MaquinaParameter, intEstadoParameter);
+        }
+    
+        public virtual int Insertar_Maqui(string strNombre_Maquina, string strModelo_Maquina, Nullable<int> intEstado)
+        {
+            var strNombre_MaquinaParameter = strNombre_Maquina != null ?
+                new ObjectParameter("StrNombre_Maquina", strNombre_Maquina) :
+                new ObjectParameter("StrNombre_Maquina", typeof(string));
+    
+            var strModelo_MaquinaParameter = strModelo_Maquina != null ?
+                new ObjectParameter("StrModelo_Maquina", strModelo_Maquina) :
+                new ObjectParameter("StrModelo_Maquina", typeof(string));
+    
+            var intEstadoParameter = intEstado.HasValue ?
+                new ObjectParameter("IntEstado", intEstado) :
+                new ObjectParameter("IntEstado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Insertar_Maqui", strNombre_MaquinaParameter, strModelo_MaquinaParameter, intEstadoParameter);
+        }
+    
+        public virtual int Actualizar_Maquina(Nullable<int> intCodigo_Maquina, string strNombre_Maquina, string strModelo_Maquina, Nullable<int> intEstado)
+        {
+            var intCodigo_MaquinaParameter = intCodigo_Maquina.HasValue ?
+                new ObjectParameter("IntCodigo_Maquina", intCodigo_Maquina) :
+                new ObjectParameter("IntCodigo_Maquina", typeof(int));
+    
+            var strNombre_MaquinaParameter = strNombre_Maquina != null ?
+                new ObjectParameter("StrNombre_Maquina", strNombre_Maquina) :
+                new ObjectParameter("StrNombre_Maquina", typeof(string));
+    
+            var strModelo_MaquinaParameter = strModelo_Maquina != null ?
+                new ObjectParameter("StrModelo_Maquina", strModelo_Maquina) :
+                new ObjectParameter("StrModelo_Maquina", typeof(string));
+    
+            var intEstadoParameter = intEstado.HasValue ?
+                new ObjectParameter("IntEstado", intEstado) :
+                new ObjectParameter("IntEstado", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Actualizar_Maquina", intCodigo_MaquinaParameter, strNombre_MaquinaParameter, strModelo_MaquinaParameter, intEstadoParameter);
         }
     }
 }

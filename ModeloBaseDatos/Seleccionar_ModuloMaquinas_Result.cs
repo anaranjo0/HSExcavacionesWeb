@@ -10,22 +10,11 @@
 namespace ModeloBaseDatos
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class TblMaquina
+    public partial class Seleccionar_ModuloMaquinas_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TblMaquina()
-        {
-            this.TblHorometro = new HashSet<TblHorometro>();
-        }
-    
-        public int IntCodigo_Maquina { get; set; }
         public string StrNombre_Maquina { get; set; }
         public string StrModelo_Maquina { get; set; }
-        public Nullable<int> IntEstado { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TblHorometro> TblHorometro { get; set; }
+        public Nullable<short> IntEstado { get; set; }
     }
 }

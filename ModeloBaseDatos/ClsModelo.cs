@@ -7,10 +7,12 @@ using System.Data.Linq;
 using System.Data.Linq.Mapping;
 using System.Reflection;
 using System.Data;
+using System.Data.SqlClient;
+
 
 namespace ModeloBaseDatos
 {
-    
+
 
     public class ClsModelo
 
@@ -22,19 +24,19 @@ namespace ModeloBaseDatos
 
 
 
-      
-        public string InsertarHoras(string Fhorometro, int codMaquina, decimal Hinicia, decimal Horofinal, 
+
+        public string InsertarHoras(string Fhorometro, int codMaquina, decimal Hinicia, decimal Horofinal,
                                            decimal Standby, decimal HoroIniExtra, decimal HoroFinExtra, decimal HoraIniExtra, decimal HoraFinalExtra,
                                            decimal ValorHora, decimal Transporte, string Factura, int Obra, string Cliente)
         {
-            using(DBHSExcavcionesEntities1 Horo = new DBHSExcavcionesEntities1())
+            using (DBHSExcavcionesEntities1 Horo = new DBHSExcavcionesEntities1())
             {
 
-              
+
                 try
                 {
-                    var Horometro = Horo.Insertar_Horas(Convert.ToDateTime(Fhorometro),codMaquina,Hinicia,Horofinal,Standby,HoroIniExtra,HoroFinExtra,
-                                                        HoraIniExtra,HoraFinalExtra,ValorHora,Transporte,Factura, Obra,Cliente);
+                    var Horometro = Horo.Insertar_Horas(Convert.ToDateTime(Fhorometro), codMaquina, Hinicia, Horofinal, Standby, HoroIniExtra, HoroFinExtra,
+                                                        HoraIniExtra, HoraFinalExtra, ValorHora, Transporte, Factura, Obra, Cliente);
                     return "";
                 }
                 catch (Exception e)
@@ -46,34 +48,34 @@ namespace ModeloBaseDatos
 
         public bool InsertarCliente(string docCliente, string nombreCliente)
         {
-            using(DBHSExcavcionesEntities1 clie = new DBHSExcavcionesEntities1())
+            using (DBHSExcavcionesEntities1 clie = new DBHSExcavcionesEntities1())
             {
                 try
                 {
                     var Cliente = clie.Insertar_Cliente(docCliente, nombreCliente);
 
                     return true;
-                    
+
                 }
                 catch (Exception e)
                 {
 
-                    strError =  e.InnerException.ToString();
+                    strError = e.InnerException.ToString();
                     return false;
                 }
             }
         }
 
-        public bool insertarObra(string docCliente,  DataTable obra)
+        public bool insertarObra(string docCliente, DataTable obra)
         {
-            using(DBHSExcavcionesEntities1 Regobra = new DBHSExcavcionesEntities1())
+            using (DBHSExcavcionesEntities1 Regobra = new DBHSExcavcionesEntities1())
             {
                 try
                 {
                     foreach (DataRow valor in obra.Rows)
                     {
                         var clienteobra = Regobra.Insertar_Obra(valor[0].ToString(), docCliente);
-                        
+
                     }
                     return true;
                 }
@@ -89,21 +91,21 @@ namespace ModeloBaseDatos
         {
             using (DBHSExcavcionesEntities1 SelCliente = new DBHSExcavcionesEntities1())
             {
-                
-                    var Cliente = SelCliente.Seleccionar_Cliente_Obra(docCliente);
-                    return Cliente.ToList();
 
-                
+                var Cliente = SelCliente.Seleccionar_Cliente_Obra(docCliente);
+                return Cliente.ToList();
+
+
             }
         }
 
-        //public IEnumerable<DataView> slobra(string docclien)
+        //public ienumerable<dataview> slobra(string docclien)
         //{
-        //    using (DBHSExcavcionesEntities1 SelObra = new DBHSExcavcionesEntities1())
+        //    using (dbhsexcavcionesentities1 selobra = new dbhsexcavcionesentities1())
         //    {
-        //     var obra = (from obras in SelObra.TblObra.AsEnumerable()
-        //                                    where obras.StrDocumento_Cliente == docclien
-        //                                       select obras);
+        //        var obra = (from obras in selobra.tblobra.asenumerable()
+        //                    where obras.strdocumento_cliente == docclien
+        //                    select obras);
 
         //        return obra;
 
@@ -112,8 +114,8 @@ namespace ModeloBaseDatos
 
         //    }
         //}
-        
-        public  List<string> SeleccionarObra(string docCliente)
+
+        public List<string> SeleccionarObra(string docCliente)
         {
             using (DBHSExcavcionesEntities1 SelObra = new DBHSExcavcionesEntities1())
             {
@@ -124,7 +126,7 @@ namespace ModeloBaseDatos
 
         public bool BorrarObras(string docCliente)
         {
-            using(DBHSExcavcionesEntities1 BorrarObra = new DBHSExcavcionesEntities1())
+            using (DBHSExcavcionesEntities1 BorrarObra = new DBHSExcavcionesEntities1())
             {
                 try
                 {
@@ -141,20 +143,20 @@ namespace ModeloBaseDatos
 
         public bool ActualizarCliente(string docCliente, string NombreCliente)
         {
-            using(DBHSExcavcionesEntities1 cliente = new DBHSExcavcionesEntities1())
+            using (DBHSExcavcionesEntities1 cliente = new DBHSExcavcionesEntities1())
                 try
                 {
                     var cli = cliente.Actualizar_Cliente(docCliente, NombreCliente);
                     return true;
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     strError = e.InnerException.ToString();
                     return false;
                 }
         }
 
-        public string ActualizarObservacion(int codHoro,string Observa )
+        public string ActualizarObservacion(int codHoro, string Observa)
         {
             using (DBHSExcavcionesEntities1 Horo = new DBHSExcavcionesEntities1())
             {
@@ -162,7 +164,7 @@ namespace ModeloBaseDatos
 
                 try
                 {
-                    var Horometro = Horo.Actualizar_Observaciones(codHoro,Observa);
+                    var Horometro = Horo.Actualizar_Observaciones(codHoro, Observa);
                     return "Actualizado Correctamente";
                 }
                 catch (Exception e)
@@ -181,6 +183,93 @@ namespace ModeloBaseDatos
             }
         }
 
+       
+
+        public static IEnumerable<ClsMaq> SelectMaquina(int IntcodigoMaquina)
+        {
+            using (DBHSExcavcionesEntities1 SelMaquina = new DBHSExcavcionesEntities1())
+            {
+                IEnumerable<ClsMaq> Maquina = (from e in SelMaquina.TblMaquina
+                                               where e.IntCodigo_Maquina == IntcodigoMaquina
+                                               select new ClsMaq
+                                               {
+                                                   StrNombre_Maquina = e.StrNombre_Maquina,
+                                                   StrModelo_Maquina = e.StrModelo_Maquina,
+                                                   IntEstado = e.IntEstado.Value
+                                               });
+                return Maquina.ToList();
+              
+                
+            }
+        }
+
+        public List<string> SeleccionarMaquinaHorometro(int CodMaquina)
+        {
+            using (DBHSExcavcionesEntities1 SelMHorometro = new DBHSExcavcionesEntities1())
+            {
+                var obra = SelMHorometro.Seleccionar_MHorometro(CodMaquina);
+                return obra.ToList();
+            }
+        }
+
+
+        public  bool BorrarMaquinas(int codMaquina)
+        {
+            using (DBHSExcavcionesEntities1 BorrarMaquina = new DBHSExcavcionesEntities1())
+            {
+                try
+                {
+                    var Maq = BorrarMaquina.Eliminar_Maquinas(codMaquina);
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    strError = e.InnerException.ToString();
+                    return false;
+                }
+            }
+        }
+
+        public bool insertarMaquina(string NomMaquina, string ModeloMaquina, int EstadoMaquina)
+        {
+            using (DBHSExcavcionesEntities1 Maqui = new DBHSExcavcionesEntities1())
+            {
+                try
+                {
+                   
+                    var Maquina = Maqui.Insertar_Maqui(NomMaquina,ModeloMaquina,EstadoMaquina);
+
+                  
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    strError = e.InnerException.ToString();
+                    return false;
+                }
+            }
+        }
+
+
+        public bool actualizarMaquina(int CodMaquina, string NomMaquina, string ModeloMaquina, int EstadoMaquina)
+        {
+            using (DBHSExcavcionesEntities1 Maqui = new DBHSExcavcionesEntities1())
+            {
+                try
+                {
+
+                    var Maquina = Maqui.Actualizar_Maquina(CodMaquina, NomMaquina, ModeloMaquina, EstadoMaquina);
+
+
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    strError = e.InnerException.ToString();
+                    return false;
+                }
+            }
+        }
     }
 
 

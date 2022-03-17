@@ -55,7 +55,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClsMaq.cs" />
     <Compile Include="ClsModelo.cs" />
+    <Compile Include="DatabaseContext.cs" />
     <Compile Include="HSExcavacionesModelo.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -78,10 +80,19 @@
     <Compile Include="Seleccionar_GridFactura_Result.cs">
       <DependentUpon>HSExcavacionesModelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="Seleccionar_GridFactura_Result1.cs">
+      <DependentUpon>HSExcavacionesModelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="Seleccionar_Horas_Result.cs">
       <DependentUpon>HSExcavacionesModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Seleccionar_Horas_Result1.cs">
+      <DependentUpon>HSExcavacionesModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Seleccionar_Maquinas_Result.cs">
+      <DependentUpon>HSExcavacionesModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Seleccionar_ModuloMaquinas_Result.cs">
       <DependentUpon>HSExcavacionesModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="Seleccionar_Obra_Result.cs">
@@ -90,7 +101,13 @@
     <Compile Include="sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>HSExcavacionesModelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result1.cs">
+      <DependentUpon>HSExcavacionesModelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>HSExcavacionesModelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result1.cs">
       <DependentUpon>HSExcavacionesModelo.tt</DependentUpon>
     </Compile>
     <Compile Include="TblCliente.cs">

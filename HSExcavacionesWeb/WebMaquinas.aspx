@@ -39,8 +39,29 @@
             <asp:DropDownList ID="DPMaquina" runat="server" CssClass="form-control" Width="400px" DataSourceID="SqlMaquina" DataTextField="StrNombre_Maquina" DataValueField="IntCodigo_Maquina" AutoPostBack="True" OnSelectedIndexChanged="DPMaquina_SelectedIndexChanged">
                 <asp:ListItem Selected="True">Seleccionar</asp:ListItem>
                 </asp:DropDownList>
-                <asp:SqlDataSource ID="SqlMaquina" runat="server" ConnectionString="<%$ ConnectionStrings:DBHSExcavcionesConnectionString %>" SelectCommand="SELECT [IntCodigo_Maquina], [StrNombre_Maquina] FROM [TblMaquina] ORDER BY [StrNombre_Maquina] ASC"></asp:SqlDataSource>
+                <asp:SqlDataSource ID="SqlMaquina" runat="server" ConnectionString="<%$ ConnectionStrings:DBHSExcavcionesConnectionString %>" SelectCommand="SELECT [IntCodigo_Maquina], [StrNombre_Maquina] FROM [TblMaquina] WHERE [IntEstado] = 1 ORDER BY [StrNombre_Maquina] ASC"></asp:SqlDataSource>
        </div>
+         <div>
+            <div>Año</div>
+            </div>
+            <div>
+                <asp:DropDownList ID="DPaño" runat="server" CssClass="form-control" Width="400px" DataSourceID="SqlAño" DataTextField="año" DataValueField="año" AutoPostBack="True" OnSelectedIndexChanged="DPMaquina_SelectedIndexChanged">
+                    <asp:ListItem Selected="True">Seleccionar</asp:ListItem>
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlAño" runat="server" ConnectionString="<%$ ConnectionStrings:DBHSExcavcionesConnectionString %>" SelectCommand="select distinct(DATEPART(YEAR,DtmFecha_Horom)) as año
+                                    from TblHorometro"></asp:SqlDataSource>
+            <div>
+        </div>
+          <div>
+            <div class="text-left">Mes</div>
+            </div>
+            <div><asp:DropDownList ID="DPmes" runat="server" CssClass="form-control" Width="400px" DataSourceID="Sqlmes" DataTextField="mes" DataValueField="mes" AutoPostBack="True">
+                <asp:ListItem Selected="True">Seleccionar</asp:ListItem>
+            </asp:DropDownList>
+            <asp:SqlDataSource ID="Sqlmes" runat="server" ConnectionString="<%$ ConnectionStrings:DBHSExcavcionesConnectionString %>" SelectCommand="select distinct(DATEPART(month,DtmFecha_Horom)) as mes
+from TblHorometro"></asp:SqlDataSource>
+            </div>
+        </div>
     </section>
 
        <section>
@@ -318,7 +339,7 @@
                         </asp:TemplateField>
                         <asp:TemplateField>
                             <FooterTemplate>
-                                <asp:LinkButton ID="LnkIngresar" runat="server" ForeColor="Black" OnClick="LnkIngresar_Click" ValidationGroup="Ingresar">Ingresar</asp:LinkButton>
+                                <asp:LinkButton ID="LnkIngresar" runat="server" ForeColor="Black" OnClientClick="return confirmacion();" OnClick="LnkIngresar_Click" ValidationGroup="Ingresar">Ingresar</asp:LinkButton>
                             </FooterTemplate>
                         </asp:TemplateField>
                         <asp:CommandField ShowEditButton="True" />
@@ -353,9 +374,11 @@ TblHorometro.StrDocumento_Cliente, TblObra.StrNombre_Obra, TblCliente.StrNombre_
 (select top 1 format((DATEADD(DAY,1,DtmFecha_Horom)),'dd/MM/yyyy') from TblHorometro where TblHorometro.IntCodigo_Maquina = @original_IntCodigo_Maquina order by DtmFecha_Horom desc) as FechaInsertar
 FROM TblHorometro INNER JOIN TblObra ON TblHorometro.Intcodigo_Obra = 
 TblObra.Intcodigo_Obra INNER JOIN TblCliente ON TblHorometro.StrDocumento_Cliente = TblCliente.StrDocumento_Cliente 
-WHERE (TblHorometro.IntCodigo_Maquina = @original_IntCodigo_Maquina) ORDER BY TblHorometro.DtmFecha_Horom ASC
+WHERE (TblHorometro.IntCodigo_Maquina = @original_IntCodigo_Maquina and DATEPART(YEAR,TblHorometro.DtmFecha_Horom)= @original_año and DATEPART(month,TblHorometro.DtmFecha_Horom)= @original_mes)  ORDER BY TblHorometro.DtmFecha_Horom ASC
 
-" ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [TblHorometro] WHERE [IntCodigo_Horom] = @original_IntCodigo_Horom AND [DtmFecha_Horom] = @original_DtmFecha_Horom AND [IntCodigo_Maquina] = @original_IntCodigo_Maquina AND [IntHoroIni_Horom] = @original_IntHoroIni_Horom AND [IntHoroFin_Horom] = @original_IntHoroFin_Horom AND [IntHorasOrdina_Horom] = @original_IntHorasOrdina_Horom AND [IntStandBy_Horom] = @original_IntStandBy_Horom AND [IntHoroIniExt_Horom] = @original_IntHoroIniExt_Horom AND [IntHoroFinExt_Horom] = @original_IntHoroFinExt_Horom AND [IntHoraIniExt_Horom] = @original_IntHoraIniExt_Horom AND [IntHoraFinExt_Horom] = @original_IntHoraFinExt_Horom AND [IntHorasExtras_Horom] = @original_IntHorasExtras_Horom AND [IntHorasCobrar_Horom] = @original_IntHorasCobrar_Horom AND [DblValorHora_Horom] = @original_DblValorHora_Horom AND [DblTransporte_Horom] = @original_DblTransporte_Horom AND [IntFactura_Horom] = @original_IntFactura_Horom AND [Intcodigo_Obra] = @original_Intcodigo_Obra AND [StrDocumento_Cliente] = @original_StrDocumento_Cliente" InsertCommand="INSERT INTO [TblHorometro] ([DtmFecha_Horom], [IntCodigo_Maquina], [IntHoroIni_Horom], [IntHoroFin_Horom], [IntHorasOrdina_Horom], [IntStandBy_Horom], [IntHoroIniExt_Horom], [IntHoroFinExt_Horom], [IntHoraIniExt_Horom], [IntHoraFinExt_Horom], [IntHorasExtras_Horom], [IntHorasCobrar_Horom], [DblValorHora_Horom], [DblTransporte_Horom], [IntFactura_Horom], [Intcodigo_Obra], [StrDocumento_Cliente]) VALUES (@DtmFecha_Horom, @IntCodigo_Maquina, @IntHoroIni_Horom, @IntHoroFin_Horom, @IntHorasOrdina_Horom, @IntStandBy_Horom, @IntHoroIniExt_Horom, @IntHoroFinExt_Horom, @IntHoraIniExt_Horom, @IntHoraFinExt_Horom, @IntHorasExtras_Horom, @IntHorasCobrar_Horom, @DblValorHora_Horom, @DblTransporte_Horom, @IntFactura_Horom, @Intcodigo_Obra, @StrDocumento_Cliente)" OldValuesParameterFormatString="original_{0}" UpdateCommand="UPDATE TblHorometro SET DtmFecha_Horom = CONVERT(DATETIME,@FechaActualiza,103), 
+"
+ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [TblHorometro] WHERE [IntCodigo_Horom] = @original_IntCodigo_Horom AND [DtmFecha_Horom] = @original_DtmFecha_Horom AND [IntCodigo_Maquina] = @original_IntCodigo_Maquina AND [IntHoroIni_Horom] = @original_IntHoroIni_Horom AND [IntHoroFin_Horom] = @original_IntHoroFin_Horom AND [IntHorasOrdina_Horom] = @original_IntHorasOrdina_Horom AND [IntStandBy_Horom] = @original_IntStandBy_Horom AND [IntHoroIniExt_Horom] = @original_IntHoroIniExt_Horom AND [IntHoroFinExt_Horom] = @original_IntHoroFinExt_Horom AND [IntHoraIniExt_Horom] = @original_IntHoraIniExt_Horom AND [IntHoraFinExt_Horom] = @original_IntHoraFinExt_Horom AND [IntHorasExtras_Horom] = @original_IntHorasExtras_Horom AND [IntHorasCobrar_Horom] = @original_IntHorasCobrar_Horom AND [DblValorHora_Horom] = @original_DblValorHora_Horom AND [DblTransporte_Horom] = @original_DblTransporte_Horom AND [IntFactura_Horom] = @original_IntFactura_Horom AND [Intcodigo_Obra] = @original_Intcodigo_Obra AND [StrDocumento_Cliente] = @original_StrDocumento_Cliente" InsertCommand="INSERT INTO [TblHorometro] ([DtmFecha_Horom], [IntCodigo_Maquina], [IntHoroIni_Horom], [IntHoroFin_Horom], [IntHorasOrdina_Horom], [IntStandBy_Horom], [IntHoroIniExt_Horom], [IntHoroFinExt_Horom], [IntHoraIniExt_Horom], [IntHoraFinExt_Horom], [IntHorasExtras_Horom], [IntHorasCobrar_Horom], [DblValorHora_Horom], [DblTransporte_Horom], [IntFactura_Horom], [Intcodigo_Obra], [StrDocumento_Cliente]) VALUES (@DtmFecha_Horom, @IntCodigo_Maquina, @IntHoroIni_Horom, @IntHoroFin_Horom, @IntHorasOrdina_Horom, @IntStandBy_Horom, @IntHoroIniExt_Horom, @IntHoroFinExt_Horom, @IntHoraIniExt_Horom, @IntHoraFinExt_Horom, @IntHorasExtras_Horom, @IntHorasCobrar_Horom, @DblValorHora_Horom, @DblTransporte_Horom, @IntFactura_Horom, @Intcodigo_Obra, @StrDocumento_Cliente)" OldValuesParameterFormatString="original_{0}"
+UpdateCommand="UPDATE TblHorometro SET DtmFecha_Horom = CONVERT(DATETIME,@FechaActualiza,103), 
 IntHoroIni_Horom = @IntHoroIni_Horom, 
 IntHoroFin_Horom = @IntHoroFin_Horom, 
 IntStandBy_Horom = @IntStandBy_Horom, 
@@ -369,65 +392,68 @@ IntFactura_Horom = @IntFactura_Horom,
 Intcodigo_Obra = @Intcodigo_Obra, 
 StrDocumento_Cliente = @StrDocumento_Cliente 
 WHERE (IntCodigo_Horom = @original_IntCodigo_Horom)">
-                    <DeleteParameters>
-                        <asp:Parameter Name="original_IntCodigo_Horom" Type="Int32" />
-                        <asp:Parameter DbType="Date" Name="original_DtmFecha_Horom" />
-                        <asp:Parameter Name="original_IntCodigo_Maquina" Type="Int32" />
-                        <asp:Parameter Name="original_IntHoroIni_Horom" Type="Decimal" />
-                        <asp:Parameter Name="original_IntHoroFin_Horom" Type="Decimal" />
-                        <asp:Parameter Name="original_IntHorasOrdina_Horom" Type="Decimal" />
-                        <asp:Parameter Name="original_IntStandBy_Horom" Type="Decimal" />
-                        <asp:Parameter Name="original_IntHoroIniExt_Horom" Type="Decimal" />
-                        <asp:Parameter Name="original_IntHoroFinExt_Horom" Type="Decimal" />
-                        <asp:Parameter Name="original_IntHoraIniExt_Horom" Type="Decimal" />
-                        <asp:Parameter Name="original_IntHoraFinExt_Horom" Type="Decimal" />
-                        <asp:Parameter Name="original_IntHorasExtras_Horom" Type="Decimal" />
-                        <asp:Parameter Name="original_IntHorasCobrar_Horom" Type="Decimal" />
-                        <asp:Parameter Name="original_DblValorHora_Horom" Type="Decimal" />
-                        <asp:Parameter Name="original_DblTransporte_Horom" Type="Decimal" />
-                        <asp:Parameter Name="original_IntFactura_Horom" Type="String" />
-                        <asp:Parameter Name="original_Intcodigo_Obra" Type="Int32" />
-                        <asp:Parameter Name="original_StrDocumento_Cliente" Type="String" />
-                    </DeleteParameters>
-                    <InsertParameters>
-                        <asp:Parameter DbType="Date" Name="DtmFecha_Horom" />
-                        <asp:Parameter Name="IntCodigo_Maquina" Type="Int32" />
-                        <asp:Parameter Name="IntHoroIni_Horom" Type="Decimal" />
-                        <asp:Parameter Name="IntHoroFin_Horom" Type="Decimal" />
-                        <asp:Parameter Name="IntHorasOrdina_Horom" Type="Decimal" />
-                        <asp:Parameter Name="IntStandBy_Horom" Type="Decimal" />
-                        <asp:Parameter Name="IntHoroIniExt_Horom" Type="Decimal" />
-                        <asp:Parameter Name="IntHoroFinExt_Horom" Type="Decimal" />
-                        <asp:Parameter Name="IntHoraIniExt_Horom" Type="Decimal" />
-                        <asp:Parameter Name="IntHoraFinExt_Horom" Type="Decimal" />
-                        <asp:Parameter Name="IntHorasExtras_Horom" Type="Decimal" />
-                        <asp:Parameter Name="IntHorasCobrar_Horom" Type="Decimal" />
-                        <asp:Parameter Name="DblValorHora_Horom" Type="Decimal" />
-                        <asp:Parameter Name="DblTransporte_Horom" Type="Decimal" />
-                        <asp:Parameter Name="IntFactura_Horom" Type="String" />
-                        <asp:Parameter Name="Intcodigo_Obra" Type="Int32" />
-                        <asp:Parameter Name="StrDocumento_Cliente" Type="String" />
-                    </InsertParameters>
-                    <SelectParameters>
-                        <asp:ControlParameter ControlID="DPMaquina" Name="original_IntCodigo_Maquina" PropertyName="SelectedValue" />
-                    </SelectParameters>
-                    <UpdateParameters>
-                        <asp:Parameter Name="FechaActualiza" />
-                        <asp:Parameter Name="IntHoroIni_Horom" Type="Decimal" />
-                        <asp:Parameter Name="IntHoroFin_Horom" Type="Decimal" />
-                        <asp:Parameter Name="IntStandBy_Horom" Type="Decimal" />
-                        <asp:Parameter Name="IntHoroIniExt_Horom" Type="Decimal" />
-                        <asp:Parameter Name="IntHoroFinExt_Horom" Type="Decimal" />
-                        <asp:Parameter Name="IntHoraIniExt_Horom" Type="Decimal" />
-                        <asp:Parameter Name="IntHoraFinExt_Horom" Type="Decimal" />
-                        <asp:Parameter Name="DblValorHora_Horom" Type="Decimal" />
-                        <asp:Parameter Name="DblTransporte_Horom" Type="Decimal" />
-                        <asp:Parameter Name="IntFactura_Horom" Type="string" />
-                        <asp:Parameter Name="Intcodigo_Obra" Type="string" />
-                        <asp:Parameter Name="StrDocumento_Cliente" Type="String" />
-                        <asp:Parameter Name="original_IntCodigo_Horom" Type="Int32" />
-                    </UpdateParameters>
-                </asp:SqlDataSource>
+                <DeleteParameters>
+                    <asp:Parameter Name="original_IntCodigo_Horom" Type="Int32" />
+                    <asp:Parameter DbType="Date" Name="original_DtmFecha_Horom" />
+                    <asp:Parameter Name="original_IntCodigo_Maquina" Type="Int32" />
+                    <asp:Parameter Name="original_IntHoroIni_Horom" Type="Decimal" />
+                    <asp:Parameter Name="original_IntHoroFin_Horom" Type="Decimal" />
+                    <asp:Parameter Name="original_IntHorasOrdina_Horom" Type="Decimal" />
+                    <asp:Parameter Name="original_IntStandBy_Horom" Type="Decimal" />
+                    <asp:Parameter Name="original_IntHoroIniExt_Horom" Type="Decimal" />
+                    <asp:Parameter Name="original_IntHoroFinExt_Horom" Type="Decimal" />
+                    <asp:Parameter Name="original_IntHoraIniExt_Horom" Type="Decimal" />
+                    <asp:Parameter Name="original_IntHoraFinExt_Horom" Type="Decimal" />
+                    <asp:Parameter Name="original_IntHorasExtras_Horom" Type="Decimal" />
+                    <asp:Parameter Name="original_IntHorasCobrar_Horom" Type="Decimal" />
+                    <asp:Parameter Name="original_DblValorHora_Horom" Type="Decimal" />
+                    <asp:Parameter Name="original_DblTransporte_Horom" Type="Decimal" />
+                    <asp:Parameter Name="original_IntFactura_Horom" Type="String" />
+                    <asp:Parameter Name="original_Intcodigo_Obra" Type="Int32" />
+                    <asp:Parameter Name="original_StrDocumento_Cliente" Type="String" />
+                </DeleteParameters>
+                <InsertParameters>
+                    <asp:Parameter DbType="Date" Name="DtmFecha_Horom" />
+                    <asp:Parameter Name="IntCodigo_Maquina" Type="Int32" />
+                    <asp:Parameter Name="IntHoroIni_Horom" Type="Decimal" />
+                    <asp:Parameter Name="IntHoroFin_Horom" Type="Decimal" />
+                    <asp:Parameter Name="IntHorasOrdina_Horom" Type="Decimal" />
+                    <asp:Parameter Name="IntStandBy_Horom" Type="Decimal" />
+                    <asp:Parameter Name="IntHoroIniExt_Horom" Type="Decimal" />
+                    <asp:Parameter Name="IntHoroFinExt_Horom" Type="Decimal" />
+                    <asp:Parameter Name="IntHoraIniExt_Horom" Type="Decimal" />
+                    <asp:Parameter Name="IntHoraFinExt_Horom" Type="Decimal" />
+                    <asp:Parameter Name="IntHorasExtras_Horom" Type="Decimal" />
+                    <asp:Parameter Name="IntHorasCobrar_Horom" Type="Decimal" />
+                    <asp:Parameter Name="DblValorHora_Horom" Type="Decimal" />
+                    <asp:Parameter Name="DblTransporte_Horom" Type="Decimal" />
+                    <asp:Parameter Name="IntFactura_Horom" Type="String" />
+                    <asp:Parameter Name="Intcodigo_Obra" Type="Int32" />
+                    <asp:Parameter Name="StrDocumento_Cliente" Type="String" />
+                </InsertParameters>
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="DPMaquina" Name="original_IntCodigo_Maquina" PropertyName="SelectedValue" />
+                    <asp:ControlParameter ControlID="DPaño" Name="original_año" PropertyName="SelectedValue" />
+                    <asp:ControlParameter ControlID="DPmes" Name="original_mes" PropertyName="SelectedValue" />
+                </SelectParameters>
+                <UpdateParameters>
+                    <asp:Parameter Name="FechaActualiza" />
+                    <asp:Parameter Name="IntHoroIni_Horom" Type="Decimal" />
+                    <asp:Parameter Name="IntHoroFin_Horom" Type="Decimal" />
+                    <asp:Parameter Name="IntStandBy_Horom" Type="Decimal" />
+                    <asp:Parameter Name="IntHoroIniExt_Horom" Type="Decimal" />
+                    <asp:Parameter Name="IntHoroFinExt_Horom" Type="Decimal" />
+                    <asp:Parameter Name="IntHoraIniExt_Horom" Type="Decimal" />
+                    <asp:Parameter Name="IntHoraFinExt_Horom" Type="Decimal" />
+                    <asp:Parameter Name="DblValorHora_Horom" Type="Decimal" />
+                    <asp:Parameter Name="DblTransporte_Horom" Type="Decimal" />
+                    <asp:Parameter Name="IntFactura_Horom" Type="string" />
+                    <asp:Parameter Name="Intcodigo_Obra" Type="string" />
+                    
+                    <asp:Parameter Name="StrDocumento_Cliente" Type="String" />
+                    <asp:Parameter Name="original_IntCodigo_Horom" Type="Int32" />
+                </UpdateParameters>
+            </asp:SqlDataSource>
    </div>
    </section>
     

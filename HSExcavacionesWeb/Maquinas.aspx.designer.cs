@@ -11,17 +11,17 @@ namespace HSExcavacionesWeb
 {
 
 
-    public partial class WebMaquinas
+    public partial class Maquinas
     {
 
         /// <summary>
-        /// Control DPMaquina.
+        /// Control dpConsultaMaquinas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DPMaquina;
+        protected global::System.Web.UI.WebControls.DropDownList dpConsultaMaquinas;
 
         /// <summary>
         /// Control SqlMaquina.
@@ -33,49 +33,76 @@ namespace HSExcavacionesWeb
         protected global::System.Web.UI.WebControls.SqlDataSource SqlMaquina;
 
         /// <summary>
-        /// Control DPaño.
+        /// Control lnkNuevo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DPaño;
+        protected global::System.Web.UI.WebControls.LinkButton lnkNuevo;
 
         /// <summary>
-        /// Control SqlAño.
+        /// Control txtNomMaquina.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlAño;
+        protected global::System.Web.UI.WebControls.TextBox txtNomMaquina;
 
         /// <summary>
-        /// Control DPmes.
+        /// Control RFVingresar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DPmes;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RFVingresar;
 
         /// <summary>
-        /// Control Sqlmes.
+        /// Control txtModMaquina.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource Sqlmes;
+        protected global::System.Web.UI.WebControls.TextBox txtModMaquina;
 
         /// <summary>
-        /// Control GRDmaquinaria.
+        /// Control RdEstado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GRDmaquinaria;
+        protected global::System.Web.UI.WebControls.RadioButtonList RdEstado;
+
+        /// <summary>
+        /// Control lnkGuardar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkGuardar;
+
+        /// <summary>
+        /// Control lnkActualizar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkActualizar;
+
+        /// <summary>
+        /// Control lnkEliminar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkEliminar;
 
         /// <summary>
         /// Control lblError.
@@ -85,14 +112,5 @@ namespace HSExcavacionesWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblError;
-
-        /// <summary>
-        /// Control SQLDTGHorometro.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SQLDTGHorometro;
     }
 }

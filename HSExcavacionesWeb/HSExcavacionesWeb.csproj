@@ -93,6 +93,7 @@
     <Content Include="Imagenes\t1.png" />
     <Content Include="js\Funciones.js" />
     <Content Include="default.aspx" />
+    <Content Include="Maquinas.aspx" />
     <Content Include="packages.config" />
     <Content Include="HSExcavaciones.Master" />
     <Content Include="styles.css" />
@@ -137,6 +138,13 @@
     </Compile>
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maquinas.aspx.cs">
+      <DependentUpon>Maquinas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maquinas.aspx.designer.cs">
+      <DependentUpon>Maquinas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebMaquinas.aspx.cs">

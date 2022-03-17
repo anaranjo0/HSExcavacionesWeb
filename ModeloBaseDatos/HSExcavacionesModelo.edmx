@@ -45,6 +45,7 @@
           <Property Name="IntCodigo_Maquina" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StrNombre_Maquina" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="StrModelo_Maquina" Type="varchar" MaxLength="100" />
+          <Property Name="IntEstado" Type="int" />
         </EntityType>
         <EntityType Name="TblObra">
           <Key>
@@ -107,6 +108,16 @@
           <Parameter Name="StrDocumento_Cliente" Type="varchar" Mode="In" />
           <Parameter Name="StrNombre_Cliente" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="Actualizar_Maquina" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IntCodigo_Maquina" Type="int" Mode="In" />
+          <Parameter Name="StrNombre_Maquina" Type="varchar" Mode="In" />
+          <Parameter Name="StrModelo_Maquina" Type="varchar" Mode="In" />
+          <Parameter Name="IntEstado" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Actualizar_Obras" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Intcodigo_Obra" Type="int" Mode="In" />
+          <Parameter Name="StrNombre_Obra" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="Actualizar_Observaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IntCodigo_Horom" Type="int" Mode="In" />
           <Parameter Name="strObservacion_Horom" Type="varchar(max)" Mode="In" />
@@ -114,6 +125,10 @@
         <Function Name="borrar_Obra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StrDocumento_Cliente" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="Eliminar_Maquinas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IntCodigo_Maquina" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="Insertar_Cliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StrDocumento_Cliente" Type="varchar" Mode="In" />
           <Parameter Name="StrNombre_Cliente" Type="varchar" Mode="In" />
@@ -134,6 +149,16 @@
           <Parameter Name="Intcodigo_Obra" Type="int" Mode="In" />
           <Parameter Name="StrDocumento_Cliente" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="Insertar_Maqui" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StrNombre_Maquina" Type="varchar" Mode="In" />
+          <Parameter Name="StrModelo_Maquina" Type="varchar" Mode="In" />
+          <Parameter Name="IntEstado" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Insertar_Maquinas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StrNombre_Maquina" Type="varchar" Mode="In" />
+          <Parameter Name="StrModelo_Maquina" Type="varchar" Mode="In" />
+          <Parameter Name="IntEstado" Type="int" Mode="In" />
+        </Function>
         <Function Name="Insertar_Obra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StrNombre_Obra" Type="varchar" Mode="In" />
           <Parameter Name="StrDocumento_Cliente" Type="varchar" Mode="In" />
@@ -141,13 +166,53 @@
         <Function Name="Seleccionar_Cliente_Obra" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StrDocumento_Cliente" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="Seleccionar_GridFactura" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="intFactura_horometro" Type="char" Mode="In" />
+          <Parameter Name="intCodigo_Maquina" Type="int" Mode="In" />
+        </Function>
         <Function Name="Seleccionar_Horas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Seleccionar_MHorometro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IntCodigo_Maquina" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Seleccionar_ModuloMaquinas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IntCodigo_Maquina" Type="int" Mode="In" />
+        </Function>
         <Function Name="Seleccionar_Obras" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="StrDocumento_Cliente" Type="varchar" Mode="In" />
         </Function>
         <Function Name="Seleccionar_Observaciones" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IntCodigo_Horom" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="DBHSExcavcionesModelStoreContainer">
           <EntitySet Name="TblCliente" EntityType="Self.TblCliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblHorometro" EntityType="Self.TblHorometro" Schema="dbo" store:Type="Tables" />
@@ -176,7 +241,6 @@
       <Schema Namespace="DBHSExcavcionesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DBHSExcavcionesEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="TblCliente" EntityType="DBHSExcavcionesModel.TblCliente" />
-          <EntitySet Name="TblMaquina" EntityType="DBHSExcavcionesModel.TblMaquina" />
           <EntitySet Name="TblObra" EntityType="DBHSExcavcionesModel.TblObra" />
           <FunctionImport Name="Insertar_Horas">
             <Parameter Name="DtmFecha_Horom" Mode="In" Type="DateTime" />
@@ -225,10 +289,6 @@
             <End Role="TblCliente" EntitySet="TblCliente" />
             <End Role="TblHorometro" EntitySet="TblHorometro" />
           </AssociationSet>
-          <AssociationSet Name="FK_TblHorometro_TblMaquina" Association="DBHSExcavcionesModel.FK_TblHorometro_TblMaquina">
-            <End Role="TblMaquina" EntitySet="TblMaquina" />
-            <End Role="TblHorometro" EntitySet="TblHorometro" />
-          </AssociationSet>
           <AssociationSet Name="FK_TblHorometro_TblObra" Association="DBHSExcavcionesModel.FK_TblHorometro_TblObra">
             <End Role="TblObra" EntitySet="TblObra" />
             <End Role="TblHorometro" EntitySet="TblHorometro" />
@@ -242,6 +302,103 @@
           </FunctionImport>
           <FunctionImport Name="Seleccionar_Obra" ReturnType="Collection(DBHSExcavcionesModel.Seleccionar_Obra_Result)">
             <Parameter Name="StrDocumento_Cliente" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Actualizar_Obras">
+            <Parameter Name="Intcodigo_Obra" Mode="In" Type="Int32" />
+            <Parameter Name="StrNombre_Obra" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Seleccionar_GridFactura" ReturnType="Collection(DBHSExcavcionesModel.Seleccionar_GridFactura_Result1)">
+            <Parameter Name="intFactura_horometro" Mode="In" Type="String" />
+            <Parameter Name="intCodigo_Maquina" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Seleccionar_Maquinas" ReturnType="Collection(DBHSExcavcionesModel.Seleccionar_Maquinas_Result)">
+          <Parameter Name="IntFactura_Horom" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Seleccionar_ModuloMaquinas" ReturnType="Collection(DBHSExcavcionesModel.Seleccionar_ModuloMaquinas_Result)">
+          <Parameter Name="IntCodigo_Maquina" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(DBHSExcavcionesModel.sp_helpdiagramdefinition_Result1)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(DBHSExcavcionesModel.sp_helpdiagrams_Result1)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="TblMaquina" EntityType="DBHSExcavcionesModel.TblMaquina" />
+          <AssociationSet Name="FK_TblHorometro_TblMaquina" Association="DBHSExcavcionesModel.FK_TblHorometro_TblMaquina">
+            <End Role="TblMaquina" EntitySet="TblMaquina" />
+            <End Role="TblHorometro" EntitySet="TblHorometro" />
+          </AssociationSet>
+          <FunctionImport Name="Eliminar_Maquinas">
+          <Parameter Name="IntCodigo_Maquina" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Seleccionar_MaquinasHorometro" ReturnType="Collection(Int32)">
+          <Parameter Name="IntCodigo_Maquina" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Seleccionar_MaquHorometro" ReturnType="Collection(Int32)">
+          <Parameter Name="IntCodigo_Maquina" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Seleccionar_MHorometro" ReturnType="Collection(String)">
+          <Parameter Name="IntCodigo_Maquina" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Insertar_Maquina">
+            <Parameter Name="StrNombre_Maquina" Mode="In" Type="String" />
+            <Parameter Name="StrModelo_Maquina" Mode="In" Type="String" />
+            <Parameter Name="IntEstado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Insertar_Maquinas">
+            <Parameter Name="StrNombre_Maquina" Mode="In" Type="String" />
+            <Parameter Name="StrModelo_Maquina" Mode="In" Type="String" />
+            <Parameter Name="IntEstado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Insertar_Maquinas1">
+            <Parameter Name="StrNombre_Maquina" Mode="In" Type="String" />
+            <Parameter Name="StrModelo_Maquina" Mode="In" Type="String" />
+            <Parameter Name="IntEstado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Insertar_Maquinas2">
+            <Parameter Name="StrNombre_Maquina" Mode="In" Type="String" />
+            <Parameter Name="StrModelo_Maquina" Mode="In" Type="String" />
+            <Parameter Name="IntEstado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Insertar_Maquinas3">
+            <Parameter Name="StrNombre_Maquina" Mode="In" Type="String" />
+            <Parameter Name="StrModelo_Maquina" Mode="In" Type="String" />
+            <Parameter Name="IntEstado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Insertar_Maqui">
+            <Parameter Name="StrNombre_Maquina" Mode="In" Type="String" />
+            <Parameter Name="StrModelo_Maquina" Mode="In" Type="String" />
+            <Parameter Name="IntEstado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Actualizar_Maquina">
+            <Parameter Name="IntCodigo_Maquina" Mode="In" Type="Int32" />
+            <Parameter Name="StrNombre_Maquina" Mode="In" Type="String" />
+            <Parameter Name="StrModelo_Maquina" Mode="In" Type="String" />
+            <Parameter Name="IntEstado" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="Seleccionar_Horas_Result">
@@ -284,15 +441,6 @@
           <Property Name="StrDireccion_Cliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TblObra" Relationship="DBHSExcavcionesModel.FK__TblObra__StrDocu__3C34F16F" FromRole="TblCliente" ToRole="TblObra" />
           <NavigationProperty Name="TblHorometro" Relationship="DBHSExcavcionesModel.FK_TblHorometro_TblCliente" FromRole="TblCliente" ToRole="TblHorometro" />
-        </EntityType>
-        <EntityType Name="TblMaquina">
-          <Key>
-            <PropertyRef Name="IntCodigo_Maquina" />
-          </Key>
-          <Property Name="IntCodigo_Maquina" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StrNombre_Maquina" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="StrModelo_Maquina" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="TblHorometro" Relationship="DBHSExcavcionesModel.FK_TblHorometro_TblMaquina" FromRole="TblMaquina" ToRole="TblHorometro" />
         </EntityType>
         <EntityType Name="TblObra">
           <Key>
@@ -374,8 +522,8 @@
           <Property Name="StrDocumento_Cliente" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="strObservacion_Horom" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TblCliente" Relationship="DBHSExcavcionesModel.FK_TblHorometro_TblCliente" FromRole="TblHorometro" ToRole="TblCliente" />
-          <NavigationProperty Name="TblMaquina" Relationship="DBHSExcavcionesModel.FK_TblHorometro_TblMaquina" FromRole="TblHorometro" ToRole="TblMaquina" />
           <NavigationProperty Name="TblObra" Relationship="DBHSExcavcionesModel.FK_TblHorometro_TblObra" FromRole="TblHorometro" ToRole="TblObra" />
+          <NavigationProperty Name="TblMaquina" Relationship="DBHSExcavcionesModel.FK_TblHorometro_TblMaquina" FromRole="TblHorometro" ToRole="TblMaquina" />
         </EntityType>
         <Association Name="FK_TblHorometro_TblCliente">
           <End Type="DBHSExcavcionesModel.TblCliente" Role="TblCliente" Multiplicity="1" />
@@ -386,18 +534,6 @@
             </Principal>
             <Dependent Role="TblHorometro">
               <PropertyRef Name="StrDocumento_Cliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TblHorometro_TblMaquina">
-          <End Type="DBHSExcavcionesModel.TblMaquina" Role="TblMaquina" Multiplicity="1" />
-          <End Type="DBHSExcavcionesModel.TblHorometro" Role="TblHorometro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TblMaquina">
-              <PropertyRef Name="IntCodigo_Maquina" />
-            </Principal>
-            <Dependent Role="TblHorometro">
-              <PropertyRef Name="IntCodigo_Maquina" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -417,6 +553,66 @@
           <Property Type="Int32" Name="Intcodigo_Obra" Nullable="false" />
           <Property Type="String" Name="StrNombre_Obra" Nullable="false" MaxLength="200" />
         </ComplexType>
+        <ComplexType Name="Seleccionar_GridFactura_Result1">
+          <Property Type="String" Name="IntFactura_Horom" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="DtmFecha_Horom" Nullable="true" MaxLength="4000" />
+          <Property Type="Decimal" Name="IntHoroIni_Horom" Nullable="true" Precision="11" Scale="2" />
+          <Property Type="Decimal" Name="IntHoroFin_Horom" Nullable="true" Precision="11" Scale="2" />
+          <Property Type="Decimal" Name="IntHorasOrdina_Horom" Nullable="true" Precision="12" Scale="2" />
+          <Property Type="Decimal" Name="IntStandBy_Horom" Nullable="false" Precision="5" Scale="2" />
+          <Property Type="Decimal" Name="IntHoroIniExt_Horom" Nullable="true" Precision="11" Scale="2" />
+          <Property Type="Decimal" Name="IntHoroFinExt_Horom" Nullable="true" Precision="11" Scale="2" />
+          <Property Type="Decimal" Name="IntHoraIniExt_Horom" Nullable="true" Precision="5" Scale="2" />
+          <Property Type="Decimal" Name="IntHoraFinExt_Horom" Nullable="true" Precision="5" Scale="2" />
+          <Property Type="Decimal" Name="IntHorasExtras_Horom" Nullable="true" Precision="6" Scale="2" />
+          <Property Type="Decimal" Name="IntHorasCobrar_Horom" Nullable="true" Precision="7" Scale="2" />
+          <Property Type="Decimal" Name="DblTransporte_Horom" Nullable="true" Precision="7" Scale="0" />
+          <Property Type="Decimal" Name="DblValorHora_Horom" Nullable="false" Precision="6" Scale="0" />
+          <Property Type="Decimal" Name="Total_Horas" Nullable="true" Precision="14" Scale="2" />
+          <Property Type="Decimal" Name="Valor" Nullable="true" Precision="15" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="Seleccionar_Maquinas_Result">
+          <Property Type="Int32" Name="IntCodigo_Maquina" Nullable="false" />
+          <Property Type="String" Name="StrNombre_Maquina" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="Seleccionar_ModuloMaquinas_Result">
+          <Property Type="String" Name="StrNombre_Maquina" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="StrModelo_Maquina" Nullable="true" MaxLength="100" />
+          <Property Type="Int16" Name="IntEstado" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result1">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result1">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="TblMaquina">
+          <Key>
+            <PropertyRef Name="IntCodigo_Maquina" />
+          </Key>
+          <Property Name="IntCodigo_Maquina" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StrNombre_Maquina" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="StrModelo_Maquina" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IntEstado" Type="Int32" />
+          <NavigationProperty Name="TblHorometro" Relationship="DBHSExcavcionesModel.FK_TblHorometro_TblMaquina" FromRole="TblMaquina" ToRole="TblHorometro" />
+        </EntityType>
+        <Association Name="FK_TblHorometro_TblMaquina">
+          <End Type="DBHSExcavcionesModel.TblMaquina" Role="TblMaquina" Multiplicity="1" />
+          <End Type="DBHSExcavcionesModel.TblHorometro" Role="TblHorometro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblMaquina">
+              <PropertyRef Name="IntCodigo_Maquina" />
+            </Principal>
+            <Dependent Role="TblHorometro">
+              <PropertyRef Name="IntCodigo_Maquina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -430,15 +626,6 @@
                 <ScalarProperty Name="StrTelefono_Cliente" ColumnName="StrTelefono_Cliente" />
                 <ScalarProperty Name="StrNombre_Cliente" ColumnName="StrNombre_Cliente" />
                 <ScalarProperty Name="StrDocumento_Cliente" ColumnName="StrDocumento_Cliente" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TblMaquina">
-            <EntityTypeMapping TypeName="DBHSExcavcionesModel.TblMaquina">
-              <MappingFragment StoreEntitySet="TblMaquina">
-                <ScalarProperty Name="StrModelo_Maquina" ColumnName="StrModelo_Maquina" />
-                <ScalarProperty Name="StrNombre_Maquina" ColumnName="StrNombre_Maquina" />
-                <ScalarProperty Name="IntCodigo_Maquina" ColumnName="IntCodigo_Maquina" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -510,6 +697,77 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="Actualizar_Observaciones" FunctionName="DBHSExcavcionesModel.Store.Actualizar_Observaciones" />
           <FunctionImportMapping FunctionImportName="Seleccionar_Observaciones" FunctionName="DBHSExcavcionesModel.Store.Seleccionar_Observaciones" />
+          <FunctionImportMapping FunctionImportName="Actualizar_Obras" FunctionName="DBHSExcavcionesModel.Store.Actualizar_Obras" />
+          <FunctionImportMapping FunctionImportName="Seleccionar_GridFactura" FunctionName="DBHSExcavcionesModel.Store.Seleccionar_GridFactura">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBHSExcavcionesModel.Seleccionar_GridFactura_Result1">
+                <ScalarProperty Name="IntFactura_Horom" ColumnName="IntFactura_Horom" />
+                <ScalarProperty Name="DtmFecha_Horom" ColumnName="DtmFecha_Horom" />
+                <ScalarProperty Name="IntHoroIni_Horom" ColumnName="IntHoroIni_Horom" />
+                <ScalarProperty Name="IntHoroFin_Horom" ColumnName="IntHoroFin_Horom" />
+                <ScalarProperty Name="IntHorasOrdina_Horom" ColumnName="IntHorasOrdina_Horom" />
+                <ScalarProperty Name="IntStandBy_Horom" ColumnName="IntStandBy_Horom" />
+                <ScalarProperty Name="IntHoroIniExt_Horom" ColumnName="IntHoroIniExt_Horom" />
+                <ScalarProperty Name="IntHoroFinExt_Horom" ColumnName="IntHoroFinExt_Horom" />
+                <ScalarProperty Name="IntHoraIniExt_Horom" ColumnName="IntHoraIniExt_Horom" />
+                <ScalarProperty Name="IntHoraFinExt_Horom" ColumnName="IntHoraFinExt_Horom" />
+                <ScalarProperty Name="IntHorasExtras_Horom" ColumnName="IntHorasExtras_Horom" />
+                <ScalarProperty Name="IntHorasCobrar_Horom" ColumnName="IntHorasCobrar_Horom" />
+                <ScalarProperty Name="DblTransporte_Horom" ColumnName="DblTransporte_Horom" />
+                <ScalarProperty Name="DblValorHora_Horom" ColumnName="DblValorHora_Horom" />
+                <ScalarProperty Name="Total_Horas" ColumnName="Total_Horas" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Seleccionar_ModuloMaquinas" FunctionName="DBHSExcavcionesModel.Store.Seleccionar_ModuloMaquinas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBHSExcavcionesModel.Seleccionar_ModuloMaquinas_Result">
+                <ScalarProperty Name="StrNombre_Maquina" ColumnName="StrNombre_Maquina" />
+                <ScalarProperty Name="StrModelo_Maquina" ColumnName="StrModelo_Maquina" />
+                <ScalarProperty Name="IntEstado" ColumnName="IntEstado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="DBHSExcavcionesModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="DBHSExcavcionesModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="DBHSExcavcionesModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="DBHSExcavcionesModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBHSExcavcionesModel.sp_helpdiagramdefinition_Result1">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="DBHSExcavcionesModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DBHSExcavcionesModel.sp_helpdiagrams_Result1">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="DBHSExcavcionesModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="DBHSExcavcionesModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="TblMaquina">
+            <EntityTypeMapping TypeName="DBHSExcavcionesModel.TblMaquina">
+              <MappingFragment StoreEntitySet="TblMaquina">
+                <ScalarProperty Name="IntEstado" ColumnName="IntEstado" />
+                <ScalarProperty Name="StrModelo_Maquina" ColumnName="StrModelo_Maquina" />
+                <ScalarProperty Name="StrNombre_Maquina" ColumnName="StrNombre_Maquina" />
+                <ScalarProperty Name="IntCodigo_Maquina" ColumnName="IntCodigo_Maquina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Eliminar_Maquinas" FunctionName="DBHSExcavcionesModel.Store.Eliminar_Maquinas" />
+          <FunctionImportMapping FunctionImportName="Seleccionar_MHorometro" FunctionName="DBHSExcavcionesModel.Store.Seleccionar_MHorometro" />
+          <FunctionImportMapping FunctionImportName="Insertar_Maquinas3" FunctionName="DBHSExcavcionesModel.Store.Insertar_Maquinas" />
+          <FunctionImportMapping FunctionImportName="Insertar_Maqui" FunctionName="DBHSExcavcionesModel.Store.Insertar_Maqui" />
+          <FunctionImportMapping FunctionImportName="Actualizar_Maquina" FunctionName="DBHSExcavcionesModel.Store.Actualizar_Maquina" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

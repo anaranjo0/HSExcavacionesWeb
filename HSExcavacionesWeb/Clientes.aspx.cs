@@ -104,8 +104,7 @@ namespace HSExcavacionesWeb
 
             if (ActCliente.ActualizarCliente())
             {
-                //if (ActCliente.BorrarObra())
-                //{
+               
                     if (ActCliente.IngresarObra())
                     {
                         lblError.Text = "Cliente - Obra actualizado correctamente";
@@ -116,11 +115,7 @@ namespace HSExcavacionesWeb
                     {
                         lblError.Text = "Se presento error ingrensando las obras: " + ActCliente.strError;
                     }
-                //}
-                //else
-                //{
-                //    lblError.Text = "Se presento error borrando las obras: " + ActCliente.strError;
-                //}
+               
             }
             else
             {

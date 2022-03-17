@@ -135,23 +135,34 @@
             </h2>
         </div>
         <div>
-            <div>Maquina</div>
-        </div>
-        <div>
-            <asp:DropDownList ID="DPMaquina" runat="server" CssClass="form-control" Width="400px" DataSourceID="SqlMaquina" DataTextField="StrNombre_Maquina" DataValueField="IntCodigo_Maquina" AutoPostBack="True" OnSelectedIndexChanged="DPMaquina_SelectedIndexChanged">
-                <asp:ListItem Selected="True">Seleccionar</asp:ListItem>
-            </asp:DropDownList>
-            <asp:SqlDataSource ID="SqlMaquina" runat="server" ConnectionString="<%$ ConnectionStrings:DBHSExcavcionesConnectionString %>" SelectCommand="SELECT [IntCodigo_Maquina], [StrNombre_Maquina] FROM [TblMaquina] ORDER BY [StrNombre_Maquina] ASC"></asp:SqlDataSource>
-        </div>
-        <div>
+            <div>
+                <div>Maquina</div>
+            </div>
+            <div>
+                <asp:DropDownList ID="DPMaquina" runat="server" CssClass="form-control" Width="400px" DataSourceID="SqlMaquina" DataTextField="StrNombre_Maquina" DataValueField="IntCodigo_Maquina" AutoPostBack="True" OnSelectedIndexChanged="DPMaquina_SelectedIndexChanged">
+                    <asp:ListItem Selected="True">Seleccionar</asp:ListItem>
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlMaquina" runat="server" ConnectionString="<%$ ConnectionStrings:DBHSExcavcionesConnectionString %>" SelectCommand="SELECT [IntCodigo_Maquina], [StrNombre_Maquina] FROM [TblMaquina] ORDER BY [StrNombre_Maquina] ASC"></asp:SqlDataSource>
+            </div>
+            <div>
             <div>Año</div>
+            </div>
+            <div>
+                <asp:DropDownList ID="DPaño" runat="server" CssClass="form-control" Width="400px" DataSourceID="SqlAño" DataTextField="año" DataValueField="año" AutoPostBack="True" OnSelectedIndexChanged="DPMaquina_SelectedIndexChanged">
+                    <asp:ListItem Selected="True">Seleccionar</asp:ListItem>
+                </asp:DropDownList>
+                <asp:SqlDataSource ID="SqlAño" runat="server" ConnectionString="<%$ ConnectionStrings:DBHSExcavcionesConnectionString %>" SelectCommand="select distinct(DATEPART(YEAR,DtmFecha_Horom)) as año
+                                    from TblHorometro"></asp:SqlDataSource>
+            <div>
         </div>
-        <div>
-            <asp:DropDownList ID="DPaño" runat="server" CssClass="form-control" Width="400px" DataSourceID="SqlAño" DataTextField="año" DataValueField="año" AutoPostBack="True" OnSelectedIndexChanged="DPMaquina_SelectedIndexChanged">
+          
+            <div>Mes<asp:DropDownList ID="DPmes" runat="server" CssClass="form-control" Width="400px" DataSourceID="Sqlmes" DataTextField="mes" DataValueField="mes" AutoPostBack="True">
                 <asp:ListItem Selected="True">Seleccionar</asp:ListItem>
             </asp:DropDownList>
-            <asp:SqlDataSource ID="SqlAño" runat="server" ConnectionString="<%$ ConnectionStrings:DBHSExcavcionesConnectionString %>" SelectCommand="select distinct(DATEPART(YEAR,DtmFecha_Horom)) as año
+            <asp:SqlDataSource ID="Sqlmes" runat="server" ConnectionString="<%$ ConnectionStrings:DBHSExcavcionesConnectionString %>" SelectCommand="select distinct(DATEPART(month,DtmFecha_Horom)) as mes
 from TblHorometro"></asp:SqlDataSource>
+            </div>
+        </div>
         </div>
     </section>
 
@@ -159,7 +170,7 @@ from TblHorometro"></asp:SqlDataSource>
         <div>
 
             <div>
-                <asp:GridView ID="GRDmaquinaria" runat="server" AutoGenerateColumns="False" DataSourceID="SQLDTGHorometro" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="IntCodigo_Horom" ForeColor="Black" GridLines="Vertical" Height="247px" ShowFooter="True" OnRowDataBound="GRDmaquinaria_RowDataBound" OnDataBound="GRDmaquinaria_DataBound" PageSize="360">
+                <asp:GridView ID="GRDmaquinaria" runat="server" AutoGenerateColumns="False" DataSourceID="SQLDTGHorometro" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" DataKeyNames="IntCodigo_Horom" ForeColor="Black" GridLines="Vertical" Height="247px" ShowFooter="True" OnRowDataBound="GRDmaquinaria_RowDataBound" OnDataBound="GRDmaquinaria_DataBound" PageSize="360" OnSelectedIndexChanged="GRDmaquinaria_SelectedIndexChanged1">
                     <AlternatingRowStyle BackColor="White" />
                     <Columns>
                         <asp:TemplateField HeaderText="IntCodigo_Horom" InsertVisible="False" ShowHeader="False" SortExpression="IntCodigo_Horom" Visible="False">
@@ -170,7 +181,7 @@ from TblHorometro"></asp:SqlDataSource>
                                 <asp:Label ID="lblcodhorom" runat="server" Text='<%# Bind("IntCodigo_Horom") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Fecha" SortExpression="DtmFecha_Horom">
+                        <asp:TemplateField HeaderText="Fecha" SortExpression="DtmFecha_Horom" FooterText="Fecha">
                             <EditItemTemplate>
                                 <asp:TextBox ID="txtEFecha" runat="server" CssClass="form-control" onKeyPress="return NumCheck(event,this)" Text='<%# Bind("FechaActualiza") %>' Width="180px"></asp:TextBox>
                             </EditItemTemplate>
@@ -455,19 +466,7 @@ from TblHorometro"></asp:SqlDataSource>
                     <SortedDescendingHeaderStyle BackColor="#575357" />
                 </asp:GridView>
             </div>
-             <asp:HiddenField ID="Cod_Obra" runat="server" Value='<%# Bind("Intcodigo_Obra") %>'  />
-
-            <asp:DropDownList ID="ddlColors" runat="server" onchange="Alertando()">
-
-                <asp:ListItem Text="Select" Value="0" />
-
-                <asp:ListItem Text="Red" Value="11" />
-
-                <asp:ListItem Text="Green" Value="22" />
-
-                <asp:ListItem Text="Blue" Value="33" />
-
-            </asp:DropDownList>
+             <asp:HiddenField ID="Cod_Obra" runat="server" Value='<%# Bind("Intcodigo_Obra") %>' OnValueChanged="Cod_Obra_ValueChanged"  />
 
             <div class="error">
                 <asp:Label ID="lblError" runat="server"></asp:Label>
@@ -487,7 +486,7 @@ TblHorometro.StrDocumento_Cliente, TblObra.StrNombre_Obra, TblCliente.StrNombre_
 (select top 1 format((DATEADD(DAY,1,DtmFecha_Horom)),'dd/MM/yyyy') from TblHorometro where TblHorometro.IntCodigo_Maquina = @original_IntCodigo_Maquina order by DtmFecha_Horom desc) as FechaInsertar
 FROM TblHorometro INNER JOIN TblObra ON TblHorometro.Intcodigo_Obra = 
 TblObra.Intcodigo_Obra INNER JOIN TblCliente ON TblHorometro.StrDocumento_Cliente = TblCliente.StrDocumento_Cliente 
-WHERE (TblHorometro.IntCodigo_Maquina = @original_IntCodigo_Maquina and DATEPART(YEAR,TblHorometro.DtmFecha_Horom)= @original_año)  ORDER BY TblHorometro.DtmFecha_Horom ASC
+WHERE (TblHorometro.IntCodigo_Maquina = @original_IntCodigo_Maquina and DATEPART(YEAR,TblHorometro.DtmFecha_Horom)= @original_año and DATEPART(month,TblHorometro.DtmFecha_Horom)= @original_mes)  ORDER BY TblHorometro.DtmFecha_Horom ASC
 
 "
 ConflictDetection="CompareAllValues" DeleteCommand="DELETE FROM [TblHorometro] WHERE [IntCodigo_Horom] = @original_IntCodigo_Horom AND [DtmFecha_Horom] = @original_DtmFecha_Horom AND [IntCodigo_Maquina] = @original_IntCodigo_Maquina AND [IntHoroIni_Horom] = @original_IntHoroIni_Horom AND [IntHoroFin_Horom] = @original_IntHoroFin_Horom AND [IntHorasOrdina_Horom] = @original_IntHorasOrdina_Horom AND [IntStandBy_Horom] = @original_IntStandBy_Horom AND [IntHoroIniExt_Horom] = @original_IntHoroIniExt_Horom AND [IntHoroFinExt_Horom] = @original_IntHoroFinExt_Horom AND [IntHoraIniExt_Horom] = @original_IntHoraIniExt_Horom AND [IntHoraFinExt_Horom] = @original_IntHoraFinExt_Horom AND [IntHorasExtras_Horom] = @original_IntHorasExtras_Horom AND [IntHorasCobrar_Horom] = @original_IntHorasCobrar_Horom AND [DblValorHora_Horom] = @original_DblValorHora_Horom AND [DblTransporte_Horom] = @original_DblTransporte_Horom AND [IntFactura_Horom] = @original_IntFactura_Horom AND [Intcodigo_Obra] = @original_Intcodigo_Obra AND [StrDocumento_Cliente] = @original_StrDocumento_Cliente" InsertCommand="INSERT INTO [TblHorometro] ([DtmFecha_Horom], [IntCodigo_Maquina], [IntHoroIni_Horom], [IntHoroFin_Horom], [IntHorasOrdina_Horom], [IntStandBy_Horom], [IntHoroIniExt_Horom], [IntHoroFinExt_Horom], [IntHoraIniExt_Horom], [IntHoraFinExt_Horom], [IntHorasExtras_Horom], [IntHorasCobrar_Horom], [DblValorHora_Horom], [DblTransporte_Horom], [IntFactura_Horom], [Intcodigo_Obra], [StrDocumento_Cliente]) VALUES (@DtmFecha_Horom, @IntCodigo_Maquina, @IntHoroIni_Horom, @IntHoroFin_Horom, @IntHorasOrdina_Horom, @IntStandBy_Horom, @IntHoroIniExt_Horom, @IntHoroFinExt_Horom, @IntHoraIniExt_Horom, @IntHoraFinExt_Horom, @IntHorasExtras_Horom, @IntHorasCobrar_Horom, @DblValorHora_Horom, @DblTransporte_Horom, @IntFactura_Horom, @Intcodigo_Obra, @StrDocumento_Cliente)" OldValuesParameterFormatString="original_{0}"
@@ -502,7 +501,7 @@ IntHoraFinExt_Horom = @IntHoraFinExt_Horom,
 DblValorHora_Horom = @DblValorHora_Horom, 
 DblTransporte_Horom = @DblTransporte_Horom, 
 IntFactura_Horom = @IntFactura_Horom, 
-Intcodigo_Obra = @StrDoc_obra, 
+Intcodigo_Obra = @Intcodigo_Obra, 
 StrDocumento_Cliente = @StrDocumento_Cliente 
 WHERE (IntCodigo_Horom = @original_IntCodigo_Horom)">
                 <DeleteParameters>
@@ -547,6 +546,7 @@ WHERE (IntCodigo_Horom = @original_IntCodigo_Horom)">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="DPMaquina" Name="original_IntCodigo_Maquina" PropertyName="SelectedValue" />
                     <asp:ControlParameter ControlID="DPaño" Name="original_año" PropertyName="SelectedValue" />
+                    <asp:ControlParameter ControlID="DPmes" Name="original_mes" PropertyName="SelectedValue" />
                 </SelectParameters>
                 <UpdateParameters>
                     <asp:Parameter Name="FechaActualiza" />

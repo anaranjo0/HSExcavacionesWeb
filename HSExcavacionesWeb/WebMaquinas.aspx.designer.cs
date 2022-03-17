@@ -51,6 +51,24 @@ namespace HSExcavacionesWeb
         protected global::System.Web.UI.WebControls.SqlDataSource SqlAño;
 
         /// <summary>
+        /// Control DPmes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DPmes;
+
+        /// <summary>
+        /// Control Sqlmes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource Sqlmes;
+
+        /// <summary>
         /// Control GRDmaquinaria.
         /// </summary>
         /// <remarks>
@@ -67,15 +85,6 @@ namespace HSExcavacionesWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField Cod_Obra;
-
-        /// <summary>
-        /// Control ddlColors.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlColors;
 
         /// <summary>
         /// Control lblError.

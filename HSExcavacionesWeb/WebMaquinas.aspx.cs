@@ -380,7 +380,10 @@ namespace HSExcavacionesWeb
 
         }
 
-       
+        protected void GRDmaquinaria_SelectedIndexChanged1(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

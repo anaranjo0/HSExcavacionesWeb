@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModeloBaseDatos", "ModeloBa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibMaquinaria", "LibMaquinaria\LibMaquinaria.csproj", "{43E5A001-B7FC-4DB9-AAE1-B2C016F63532}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibObras", "LibObras\LibObras.csproj", "{CBADAFE7-22B7-44E9-98EF-4EAD5E050F94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{43E5A001-B7FC-4DB9-AAE1-B2C016F63532}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43E5A001-B7FC-4DB9-AAE1-B2C016F63532}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43E5A001-B7FC-4DB9-AAE1-B2C016F63532}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBADAFE7-22B7-44E9-98EF-4EAD5E050F94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBADAFE7-22B7-44E9-98EF-4EAD5E050F94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBADAFE7-22B7-44E9-98EF-4EAD5E050F94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBADAFE7-22B7-44E9-98EF-4EAD5E050F94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

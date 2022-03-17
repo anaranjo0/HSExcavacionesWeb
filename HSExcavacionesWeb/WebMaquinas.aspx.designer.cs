@@ -78,6 +78,15 @@ namespace HSExcavacionesWeb
         protected global::System.Web.UI.WebControls.GridView GRDmaquinaria;
 
         /// <summary>
+        /// Control Cod_Obra.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField Cod_Obra;
+
+        /// <summary>
         /// Control lblError.
         /// </summary>
         /// <remarks>
